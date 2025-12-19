@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAME / VISUALS - Portfolio</title>
+    <title>CHOCOBANANA / VISUALS - Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* カスタムアニメーション */
+        /* 基本アニメーション */
         @keyframes fade-in-up {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -17,112 +17,138 @@
         .animate-fade-in-up {
             animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        
-        /* スクロールバーのカスタマイズ（任意） */
+
+        /* スクロールバー */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #FFF8E1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
+            background: #5D4037;
+            border-radius: 5px;
+            border: 2px solid #FFF8E1;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        
+        /* 液体コンテナ */
+        #liquid-header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px; /* 波が動く十分な高さ */
+            z-index: 30;
+            pointer-events: none;
+            /* 影をつけて立体感を出す */
+            filter: drop-shadow(0 4px 6px rgba(78, 52, 46, 0.4));
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#F9F9F9] text-[#333] font-sans selection:bg-black selection:text-white">
+<body class="min-h-screen bg-[#FFFCF5] text-[#4E342E] font-sans selection:bg-[#FACC15] selection:text-[#4E342E]">
 
-    <!-- === Header === -->
-    <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-8">
+    <!-- === Liquid Chocolate Header (JS Controlled) === -->
+    <div id="liquid-header-container">
+        <svg id="liquid-svg" width="100%" height="100%" style="overflow: visible;">
+            <!-- メインのチョコの波 -->
+            <path id="liquid-path" fill="#4E342E" d=""></path>
+        </svg>
+    </div>
+
+    <!-- === Header Content === -->
+    <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-widest cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                NAME / VISUALS
+            <!-- ロゴ -->
+            <h1 class="text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <span class="bg-[#FACC15] text-[#4E342E] px-2 py-1 transform -skew-x-12 inline-block border-2 border-[#FACC15] group-hover:bg-white group-hover:text-[#4E342E] transition-colors shadow-lg">CHOCOBANANA</span>
+                <span class="text-[#FACC15] font-bold drop-shadow-md">/ VISUALS</span>
             </h1>
-            <nav class="hidden md:flex gap-8 text-sm tracking-wide font-medium">
-                <a href="#works" class="hover:opacity-50 transition-opacity">WORKS</a>
-                <a href="#about" class="hover:opacity-50 transition-opacity">ABOUT</a>
-                <a href="#contact" class="hover:opacity-50 transition-opacity">CONTACT</a>
+            
+            <nav class="hidden md:flex gap-8 text-sm tracking-wide font-bold">
+                <a href="#works" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">WORKS</a>
+                <a href="#about" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">ABOUT</a>
+                <a href="#contact" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">CONTACT</a>
             </nav>
-            <!-- Mobile Menu Icon (Placeholder) -->
-            <div class="md:hidden text-xs font-bold border border-black px-2 py-1 rounded-full cursor-pointer">
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden text-xs font-bold border-2 border-[#FACC15] text-[#FACC15] px-3 py-1 rounded-full cursor-pointer hover:bg-[#FACC15] hover:text-[#4E342E] transition-colors shadow-md">
                 MENU
             </div>
         </div>
     </header>
 
     <!-- === Hero Section === -->
-    <section class="h-screen flex flex-col justify-center items-center px-6 relative">
-        <div class="text-center space-y-6 max-w-4xl animate-fade-in-up">
-            <p class="text-sm md:text-base tracking-[0.2em] text-gray-500">VIDEO CREATOR / MOTION DESIGNER</p>
-            <h2 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tighter">
+    <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32">
+        <div class="text-center space-y-6 max-w-4xl animate-fade-in-up relative z-10">
+            <p class="text-sm md:text-base tracking-[0.2em] font-bold text-[#8D6E63]">VIDEO CREATOR / MOTION DESIGNER</p>
+            <h2 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tighter text-[#4E342E]">
                 DESIGNING<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-400">EMOTION</span><br />
+                <span class="relative inline-block">
+                    <span class="relative z-10">EMOTION</span>
+                    <span class="absolute bottom-2 left-0 w-full h-4 bg-[#FACC15] -z-0 transform -rotate-1 opacity-80"></span>
+                </span><br />
                 IN MOTION
             </h2>
         </div>
         
         <div class="absolute bottom-12 animate-bounce">
-            <i data-lucide="chevron-down" class="w-8 h-8 text-gray-400"></i>
+            <i data-lucide="chevron-down" class="w-8 h-8 text-[#8D6E63]"></i>
         </div>
     </section>
 
     <!-- === Works Section === -->
-    <section id="works" class="py-24 px-6 container mx-auto">
+    <section id="works" class="py-24 px-6 container mx-auto relative z-20">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
-                <h3 class="text-3xl font-bold mb-2">SELECTED WORKS</h3>
-                <p class="text-gray-500 text-sm">クリックで詳細を表示</p>
+                <h3 class="text-3xl font-bold mb-2 border-l-4 border-[#FACC15] pl-4 text-[#4E342E]">SELECTED WORKS</h3>
+                <p class="text-[#8D6E63] text-sm pl-5">クリックで詳細を表示</p>
             </div>
             
-            <!-- Filter Buttons -->
             <div class="flex flex-wrap gap-2" id="filter-container">
-                <button data-filter="all" class="filter-btn px-4 py-2 text-sm transition-all duration-300 rounded-full border border-transparent hover:border-gray-300 bg-black text-white">ALL</button>
-                <button data-filter="mv" class="filter-btn px-4 py-2 text-sm transition-all duration-300 rounded-full border border-transparent hover:border-gray-300 text-gray-500 hover:text-black">Music Video</button>
-                <button data-filter="cg" class="filter-btn px-4 py-2 text-sm transition-all duration-300 rounded-full border border-transparent hover:border-gray-300 text-gray-500 hover:text-black">CG / 3D</button>
-                <button data-filter="lyric" class="filter-btn px-4 py-2 text-sm transition-all duration-300 rounded-full border border-transparent hover:border-gray-300 text-gray-500 hover:text-black">Lyric Motion</button>
+                <button data-filter="all" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
+                <button data-filter="mv" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
+                <button data-filter="cg" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">CG / 3D</button>
+                <button data-filter="lyric" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Lyric Motion</button>
             </div>
         </div>
 
-        <!-- Grid -->
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            <!-- JavaScriptでここに作品が挿入されます -->
+            <!-- Works injected via JS -->
         </div>
     </section>
 
     <!-- === About Section === -->
-    <section id="about" class="py-24 bg-white">
-        <div class="container mx-auto px-6 max-w-5xl">
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#FFF9C4] to-transparent opacity-50"></div>
+        
+        <svg class="absolute -bottom-10 -right-10 w-64 h-64 text-[#FACC15] opacity-20 transform rotate-12" viewBox="0 0 100 100">
+             <path fill="currentColor" d="M20,80 Q50,90 80,50 Q90,20 70,10 Q60,5 50,20 Q30,60 20,80 Z" />
+        </svg>
+
+        <div class="container mx-auto px-6 max-w-5xl relative z-10">
             <div class="grid md:grid-cols-2 gap-16 items-start">
                 <div>
-                    <h3 class="text-sm font-bold tracking-widest text-gray-400 mb-8 sticky top-32">ABOUT ME</h3>
+                    <h3 class="text-sm font-bold tracking-widest text-[#8D6E63] mb-8 sticky top-48">ABOUT ME</h3>
                 </div>
                 <div class="space-y-12">
                     <div>
-                        <h4 class="text-3xl font-bold mb-6">映像で、感情を動かす。</h4>
-                        <p class="leading-loose text-gray-600 mb-6">
-                            東京を拠点に活動する映像クリエイター。
-                            音楽の持つリズムや感情を視覚的に拡張するMV制作、
-                            抽象的な概念を具現化するCG制作を得意としています。
-                            <br /><br />
-                            「シンプルかつ強い」ビジュアル作りを心がけ、
-                            リリックモーションから3Dアニメーションまで、
-                            案件のニーズに合わせて最適な表現を提案します。
+                        <h4 class="text-3xl font-bold mb-6 text-[#4E342E]">映像で、<br>甘くほろ苦い余韻を。</h4>
+                        <p class="leading-loose text-[#5D4037] mb-6 font-medium">
+                            <strong class="bg-[#FACC15]/30 px-1">ちょこばなな / CHOCOBANANA</strong><br>
+                            東京を拠点に活動する映像クリエイター。<br><br>
+                            
+                            ポップな可愛らしさから、ダークでクールな表現まで。
+                            まるでチョコレートとバナナのように、
+                            異なる要素を組み合わせて新しい「おいしさ」＝「映像体験」を作ります。
                         </p>
                     </div>
 
                     <div>
-                        <h5 class="text-sm font-bold border-b border-gray-200 pb-2 mb-4">SKILLS / TOOLS</h5>
-                        <ul class="grid grid-cols-2 gap-4 text-sm text-gray-600">
-                            <li>After Effects</li>
-                            <li>Premiere Pro</li>
-                            <li>Blender</li>
-                            <li>Cinema 4D</li>
-                            <li>DaVinci Resolve</li>
-                            <li>TouchDesigner</li>
+                        <h5 class="text-sm font-bold border-b-2 border-[#FACC15] inline-block pb-1 mb-6 text-[#4E342E]">SKILLS / TOOLS</h5>
+                        <ul class="grid grid-cols-2 gap-4 text-sm font-medium text-[#5D4037]">
+                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>After Effects</li>
+                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>Blender</li>
+                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>TouchDesigner</li>
                         </ul>
                     </div>
                 </div>
@@ -132,67 +158,55 @@
 
     <!-- === Contact Section === -->
     <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center">
-        <h3 class="text-4xl font-bold mb-8">Let's create something together.</h3>
-        <p class="text-gray-500 mb-12">
+        <h3 class="text-4xl font-bold mb-8 text-[#4E342E]">Let's create something delicious.</h3>
+        <p class="text-[#8D6E63] mb-12 font-medium">
             制作のご依頼、ご相談などお気軽にご連絡ください。<br />
-            通常2営業日以内に返信いたします。
+            甘いお菓子でも食べながら、お話ししましょう。
         </p>
-        <a href="mailto:hello@example.com" class="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-colors text-lg">
+        <a href="mailto:hello@example.com" class="inline-flex items-center gap-3 bg-[#4E342E] text-[#FACC15] px-10 py-5 rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             <i data-lucide="mail" class="w-5 h-5"></i>
-            <span>hello@your-email.com</span>
+            <span>hello@chocobanana.com</span>
         </a>
     </section>
 
     <!-- === Footer === -->
-    <footer class="py-12 border-t border-gray-200">
+    <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1]">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex gap-6">
-                <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="text-[#8D6E63] hover:text-[#4E342E] transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="text-[#8D6E63] hover:text-[#4E342E] transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
             </div>
-            <p class="text-xs text-gray-400">
-                &copy; <span id="year"></span> NAME / VISUALS. All Rights Reserved.
+            <p class="text-xs text-[#8D6E63] font-bold">
+                &copy; <span id="year"></span> CHOCOBANANA / VISUALS. All Rights Reserved.
             </p>
         </div>
     </footer>
 
     <!-- === Modal === -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
-        <!-- Backdrop -->
-        <div id="modal-backdrop" class="absolute inset-0 bg-white/90 backdrop-blur-md"></div>
-        
-        <!-- Modal Content -->
-        <div class="bg-white w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300" id="modal-panel">
-            <button id="close-modal" class="absolute top-4 right-4 p-2 bg-black text-white rounded-full hover:bg-gray-800 z-10 transition-colors">
+        <div id="modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
+        <div class="bg-[#FFFCF5] w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="modal-panel">
+            <button id="close-modal" class="absolute top-4 right-4 p-2 bg-[#4E342E] text-[#FACC15] rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] z-10 transition-colors">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-
-            <!-- Video Placeholder Area -->
-            <div id="modal-video-area" class="w-full aspect-video bg-gray-200 flex items-center justify-center shrink-0">
-                <div class="text-white text-center">
-                    <i data-lucide="play" class="w-16 h-16 mx-auto opacity-80 mb-4"></i>
-                    <span class="font-bold tracking-widest text-xl">VIDEO PREVIEW</span>
-                </div>
-            </div>
-
-            <!-- Content Area -->
-            <div class="p-8 md:p-12 grid md:grid-cols-3 gap-12">
+            <div id="modal-video-area" class="w-full aspect-video bg-gray-200 flex items-center justify-center shrink-0 border-b-2 border-[#FACC15]"></div>
+            <div class="p-8 md:p-12 grid md:grid-cols-3 gap-12 text-[#4E342E]">
                 <div class="md:col-span-2">
                     <h2 id="modal-title" class="text-3xl font-bold mb-4">Title</h2>
-                    <p id="modal-description" class="text-gray-600 leading-relaxed whitespace-pre-line">Description</p>
+                    <p id="modal-description" class="text-[#5D4037] leading-relaxed whitespace-pre-line font-medium">Description</p>
                 </div>
                 <div class="space-y-6 text-sm">
                     <div>
-                        <h5 class="text-gray-400 font-bold text-xs tracking-wider mb-2">CATEGORY</h5>
-                        <p id="modal-category">Category</p>
+                        <h5 class="text-[#8D6E63] font-bold text-xs tracking-wider mb-2">CATEGORY</h5>
+                        <p id="modal-category" class="font-bold">Category</p>
                     </div>
                     <div>
-                        <h5 class="text-gray-400 font-bold text-xs tracking-wider mb-2">CLIENT</h5>
-                        <p id="modal-client">Client</p>
+                        <h5 class="text-[#8D6E63] font-bold text-xs tracking-wider mb-2">CLIENT</h5>
+                        <p id="modal-client" class="font-bold">Client</p>
                     </div>
                     <div>
-                        <h5 class="text-gray-400 font-bold text-xs tracking-wider mb-2">YEAR</h5>
-                        <p id="modal-year">Year</p>
+                        <h5 class="text-[#8D6E63] font-bold text-xs tracking-wider mb-2">YEAR</h5>
+                        <p id="modal-year" class="font-bold">Year</p>
                     </div>
                 </div>
             </div>
@@ -201,212 +215,212 @@
 
     <!-- === JavaScript Logic === -->
     <script>
-        // === データ定義 ===
+        // === Works Data ===
         const WORKS = [
-            {
-                id: 1,
-                title: "Neon Genesis",
-                category: "CG Work",
-                type: "cg",
-                year: "2024",
-                client: "Personal Work",
-                description: "BlenderとAfter Effectsを使用したサイバーパンクな世界観のループアニメーション。光の反射とテクスチャの質感にこだわりました。",
-                color: "bg-blue-900" 
-            },
-            {
-                id: 2,
-                title: "Summer Blue",
-                category: "Music Video",
-                type: "mv",
-                year: "2023",
-                client: "Artist A",
-                description: "疾走感のある夏曲のMV制作。実写素材と手書きアニメーションを合成し、爽やかさを表現しました。",
-                color: "bg-sky-300"
-            },
-            {
-                id: 3,
-                title: "Words dance",
-                category: "Lyric Motion",
-                type: "lyric",
-                year: "2024",
-                client: "Band B",
-                description: "歌詞の感情に合わせて文字が踊るリリックビデオ。タイポグラフィの動きだけで楽曲の世界観を拡張させることを目指しました。",
-                color: "bg-yellow-400"
-            },
-            {
-                id: 4,
-                title: "Abstract Flow",
-                category: "CG Work",
-                type: "cg",
-                year: "2023",
-                client: "Exhibition",
-                description: "流体シミュレーションを用いた抽象表現映像。",
-                color: "bg-purple-600"
-            },
-            {
-                id: 5,
-                title: "Night Drive",
-                category: "Music Video",
-                type: "mv",
-                year: "2022",
-                client: "Singer C",
-                description: "夜の都会をドライブする視点で構成されたMV。カラーグレーディングにより映画的なルックを追求。",
-                color: "bg-slate-800"
-            },
-            {
-                id: 6,
-                title: "KINETIC TYPE",
-                category: "Lyric Motion",
-                type: "lyric",
-                year: "2024",
-                client: "Personal Work",
-                description: "モーショングラフィックスの実験作。音への同期精度を高めたキネティックタイポグラフィ。",
-                color: "bg-red-500"
-            },
-            {
-                id: 7,
-                title: "ちょこばなな3",
-                category: "Lyric Motion",
-                type: "lyric",
-                year: "2029",
-                client: "Personal Work",
-                description: "モーショングラフィックスの実験作。音への同期精度を高めたキネティックタイポグラフィ。",
-                color: "bg-red-500"
-            },
+            { id: 1, title: "Neon Genesis", category: "CG Work", type: "cg", year: "2024", client: "Personal Work", description: "BlenderとAfter Effectsを使用したサイバーパンクな世界観のループアニメーション。", color: "bg-[#5D4037]" },
+            { id: 2, title: "Summer Blue", category: "Music Video", type: "mv", year: "2023", client: "Artist A", description: "疾走感のある夏曲のMV制作。", color: "bg-[#FBC02D]" },
+            { id: 3, title: "Words dance", category: "Lyric Motion", type: "lyric", year: "2024", client: "Band B", description: "歌詞の感情に合わせて文字が踊るリリックビデオ。", color: "bg-[#795548]" },
+            { id: 4, title: "Abstract Flow", category: "CG Work", type: "cg", year: "2023", client: "Exhibition", description: "流体シミュレーションを用いた抽象表現映像。", color: "bg-[#FDD835]" },
+            { id: 5, title: "Night Drive", category: "Music Video", type: "mv", year: "2022", client: "Singer C", description: "夜の都会をドライブする視点で構成されたMV。", color: "bg-[#3E2723]" },
+            { id: 6, title: "KINETIC TYPE", category: "Lyric Motion", type: "lyric", year: "2024", client: "Personal Work", description: "モーショングラフィックスの実験作。", color: "bg-[#FFEB3B]" }
         ];
+
+        // === 1. 物理演算の波（Liquid Wave） ===
+        class ChocolateWave {
+            constructor(selector) {
+                this.path = document.querySelector(selector);
+                this.points = 16; // 頂点数を増やしてより滑らかに
+                this.baseHeight = 140; 
+                this.width = window.innerWidth;
+                
+                // 物理パラメータ（どろっとした重さを表現）
+                this.viscosity = 0.08; // 粘性：低いとサラサラ、高いとネバネバ
+                this.damping = 0.85;   // 減衰：低いといつまでも揺れる、高いとすぐ止まる
+                
+                this.nodes = [];
+                this.scrollSpeed = 0;
+                this.lastScrollY = window.scrollY;
+                this.time = 0;
+
+                this.initNodes();
+                this.setupEvents();
+            }
+
+            initNodes() {
+                this.nodes = [];
+                for (let i = 0; i <= this.points; i++) {
+                    this.nodes.push({
+                        x: (this.width / this.points) * i,
+                        y: this.baseHeight,
+                        baseY: this.baseHeight,
+                        vy: 0,
+                        // 各頂点にランダムなオフセットを持たせ、不規則な波を作る
+                        phase: Math.random() * Math.PI * 2 
+                    });
+                }
+            }
+
+            setupEvents() {
+                window.addEventListener('resize', () => {
+                    this.width = window.innerWidth;
+                    this.nodes.forEach((node, i) => {
+                        node.x = (this.width / this.points) * i;
+                    });
+                });
+                
+                window.addEventListener('scroll', () => {
+                    const currentY = window.scrollY;
+                    const diff = currentY - this.lastScrollY;
+                    // スクロールの勢いを計算（上限あり）
+                    let speed = diff * 0.5;
+                    if(speed > 40) speed = 40;
+                    if(speed < -40) speed = -40;
+                    this.scrollSpeed = speed;
+                    this.lastScrollY = currentY;
+                });
+            }
+
+            update() {
+                this.time += 0.02; 
+                
+                // スクロール速度の減衰（慣性）
+                this.scrollSpeed *= 0.9;
+
+                this.nodes.forEach((node, i) => {
+                    // 基本のゆらぎ（サイン波の合成）
+                    const wave = Math.sin(this.time + node.phase) * 10 + Math.sin(this.time * 2 + i) * 5;
+                    
+                    // スクロール時の「重さ」表現
+                    // 下にスクロール（speed > 0）→ コンテンツは上に移動 → 液体はその場に留まろうとする（上に伸びる）
+                    // 逆に、止まると重力で下に戻る
+                    // ここでは、「目標位置」をスクロール速度に応じてずらす
+                    const inertiaY = this.baseHeight - (this.scrollSpeed * 1.5); 
+                    
+                    const targetY = inertiaY + wave;
+                    
+                    // バネ物理演算
+                    const force = (targetY - node.y) * this.viscosity;
+                    node.vy += force;
+                    node.vy *= this.damping;
+                    node.y += node.vy;
+                });
+            }
+
+            draw() {
+                let d = `M 0 0 L 0 ${this.nodes[0].y}`;
+                
+                // 滑らかな曲線（Catmull-Romスプラインの簡易版、または中点ベジェ）
+                for (let i = 0; i < this.nodes.length - 1; i++) {
+                    const p0 = this.nodes[i];
+                    const p1 = this.nodes[i + 1];
+                    const midX = (p0.x + p1.x) / 2;
+                    const midY = (p0.y + p1.y) / 2;
+                    d += ` Q ${p0.x} ${p0.y}, ${midX} ${midY}`;
+                }
+
+                const last = this.nodes[this.nodes.length - 1];
+                d += ` L ${last.x} ${last.y} L ${this.width} 0 Z`;
+                
+                this.path.setAttribute('d', d);
+            }
+        }
+
+        // === アニメーションループ管理 ===
+        let wave;
+
+        function animate() {
+            if (wave) {
+                wave.update();
+                wave.draw();
+            }
+            requestAnimationFrame(animate);
+        }
 
         // === 初期化 ===
         document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons(); // アイコン描画
+            lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
-            renderWorks('all'); // 初回レンダリング
-            setupScrollListener(); // スクロール設定
+            renderWorks('all');
+            
+            // アニメーション開始
+            wave = new ChocolateWave('#liquid-path');
+            animate();
+            
+            // フィルタボタン設定
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-[#4E342E]', 'text-[#FACC15]');
+                        b.classList.add('text-[#8D6E63]', 'hover:text-[#4E342E]');
+                    });
+                    e.target.classList.remove('text-[#8D6E63]', 'hover:text-[#4E342E]');
+                    e.target.classList.add('bg-[#4E342E]', 'text-[#FACC15]');
+                    renderWorks(e.target.getAttribute('data-filter'));
+                });
+            });
         });
 
-        // === Works レンダリング機能 ===
+        // Works Render
         const gridContainer = document.getElementById('works-grid');
-
         function renderWorks(filterType) {
-            gridContainer.innerHTML = ''; // クリア
-
-            const filteredWorks = filterType === 'all' 
-                ? WORKS 
-                : WORKS.filter(work => work.type === filterType);
-
+            gridContainer.innerHTML = '';
+            const filteredWorks = filterType === 'all' ? WORKS : WORKS.filter(work => work.type === filterType);
             filteredWorks.forEach(work => {
                 const workEl = document.createElement('div');
                 workEl.className = 'group cursor-pointer block animate-fade-in-up';
-                // HTML構造生成
                 workEl.innerHTML = `
-                    <div class="aspect-video w-full overflow-hidden rounded-sm relative mb-4">
+                    <div class="aspect-video w-full overflow-hidden rounded-lg relative mb-4 shadow-md group-hover:shadow-xl transition-all duration-300">
                         <div class="w-full h-full ${work.color} transition-transform duration-700 ease-out group-hover:scale-105 flex items-center justify-center">
-                            <i data-lucide="play" class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 fill-current"></i>
+                            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                                <i data-lucide="play" class="w-8 h-8 text-white fill-current ml-1"></i>
+                            </div>
                         </div>
-                        <div class="absolute top-3 left-3 bg-black/80 text-white text-[10px] px-2 py-1 rounded-sm uppercase tracking-wider">
-                            ${work.category}
-                        </div>
+                        <div class="absolute top-3 left-3 bg-[#4E342E] text-[#FACC15] text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider shadow-sm">${work.category}</div>
                     </div>
-                    <div class="flex justify-between items-start border-t border-gray-200 pt-3">
+                    <div class="flex justify-between items-start border-t-2 border-[#EFEBE9] pt-3 group-hover:border-[#FACC15] transition-colors">
                         <div>
-                            <h4 class="text-lg font-bold group-hover:text-gray-600 transition-colors">${work.title}</h4>
-                            <p class="text-xs text-gray-500 mt-1">${work.client} — ${work.year}</p>
+                            <h4 class="text-lg font-bold text-[#4E342E] group-hover:text-[#FACC15] transition-colors">${work.title}</h4>
+                            <p class="text-xs text-[#8D6E63] mt-1 font-medium">${work.client} — ${work.year}</p>
                         </div>
-                        <i data-lucide="external-link" class="w-4 h-4 text-gray-300 group-hover:text-black transition-colors"></i>
-                    </div>
-                `;
-                
-                // クリックイベント設定（モーダルを開く）
+                        <i data-lucide="external-link" class="w-5 h-5 text-[#D7CCC8] group-hover:text-[#4E342E] transition-colors"></i>
+                    </div>`;
                 workEl.addEventListener('click', () => openModal(work));
-                
                 gridContainer.appendChild(workEl);
             });
-            
-            lucide.createIcons(); // 新しく追加された要素のアイコンを描画
+            lucide.createIcons();
         }
 
-        // === フィルタリング機能 ===
-        const filterButtons = document.querySelectorAll('.filter-btn');
-
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // アクティブクラスの切り替え
-                filterButtons.forEach(b => {
-                    b.classList.remove('bg-black', 'text-white');
-                    b.classList.add('text-gray-500', 'hover:text-black');
-                });
-                e.target.classList.remove('text-gray-500', 'hover:text-black');
-                e.target.classList.add('bg-black', 'text-white');
-
-                // レンダリング実行
-                renderWorks(e.target.getAttribute('data-filter'));
-            });
-        });
-
-        // === モーダル機能 ===
+        // Modal Logic
         const modal = document.getElementById('modal');
         const modalPanel = document.getElementById('modal-panel');
         const closeModalBtn = document.getElementById('close-modal');
         const modalBackdrop = document.getElementById('modal-backdrop');
 
         function openModal(work) {
-            // データを流し込む
             document.getElementById('modal-title').textContent = work.title;
-            document.getElementById('modal-description').textContent = work.description + "\n\n制作のポイントや、担当した役割などの詳細をここに記載します。\nシンプルなレイアウトなので、作品自体の魅力が伝わりやすくなっています。";
+            document.getElementById('modal-description').textContent = work.description;
             document.getElementById('modal-category').textContent = work.category;
             document.getElementById('modal-client').textContent = work.client;
             document.getElementById('modal-year').textContent = work.year;
-
-            // 背景色とアイコンのリセット（プレビューエリア）
             const videoArea = document.getElementById('modal-video-area');
-            videoArea.className = `w-full aspect-video ${work.color} flex items-center justify-center shrink-0`;
-            // アイコン再描画のためにHTMLをセット
-            videoArea.innerHTML = `
-                <div class="text-white text-center">
-                    <i data-lucide="play" class="w-16 h-16 mx-auto opacity-80 mb-4 fill-current"></i>
-                    <span class="font-bold tracking-widest text-xl">VIDEO PREVIEW</span>
-                </div>
-            `;
+            videoArea.className = `w-full aspect-video ${work.color} flex items-center justify-center shrink-0 border-b-2 border-[#FACC15]`;
+            videoArea.innerHTML = `<div class="text-white text-center"><i data-lucide="play" class="w-16 h-16 mx-auto opacity-80 mb-4 fill-current"></i><span class="font-bold tracking-widest text-xl">VIDEO PREVIEW</span></div>`;
             lucide.createIcons();
-
-            // 表示処理
             modal.classList.remove('hidden');
-            // アニメーション用（少し遅らせて不透明度とスケールを変更）
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalPanel.classList.remove('scale-95');
-                modalPanel.classList.add('scale-100');
-            }, 10);
-            
-            document.body.style.overflow = 'hidden'; // 背景固定
+            setTimeout(() => { modal.classList.remove('opacity-0'); modalPanel.classList.remove('scale-95'); modalPanel.classList.add('scale-100'); }, 10);
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             modal.classList.add('opacity-0');
             modalPanel.classList.remove('scale-100');
             modalPanel.classList.add('scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = ''; // 背景固定解除
-            }, 300);
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
         }
 
         closeModalBtn.addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
-
-        // === スクロール検知 ===
-        function setupScrollListener() {
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('py-4', 'bg-[#F9F9F9]/90', 'backdrop-blur-sm');
-                    header.classList.remove('py-8');
-                } else {
-                    header.classList.remove('py-4', 'bg-[#F9F9F9]/90', 'backdrop-blur-sm');
-                    header.classList.add('py-8');
-                }
-            });
-        }
     </script>
 </body>
 </html>

@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHOCOBANANA / VISUALS - Portfolio</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* 基本アニメーション */
@@ -43,22 +41,26 @@
             /* 影をつけて立体感を出す */
             filter: drop-shadow(0 4px 6px rgba(78, 52, 46, 0.4));
         }
+        
+        /* モバイルメニュー用 */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-[#FFFCF5] text-[#4E342E] font-sans selection:bg-[#FACC15] selection:text-[#4E342E]">
 
-    <!-- === Liquid Chocolate Header (JS Controlled) === -->
     <div id="liquid-header-container">
         <svg id="liquid-svg" width="100%" height="100%" style="overflow: visible;">
-            <!-- メインのチョコの波 -->
             <path id="liquid-path" fill="#4E342E" d=""></path>
         </svg>
     </div>
 
-    <!-- === Header Content === -->
     <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- ロゴ -->
+        <div class="container mx-auto px-6 flex justify-between items-center relative">
             <h1 class="text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                 <span class="bg-[#FACC15] text-[#4E342E] px-2 py-1 transform -skew-x-12 inline-block border-2 border-[#FACC15] group-hover:bg-white group-hover:text-[#4E342E] transition-colors shadow-lg">CHOCOBANANA</span>
                 <span class="text-[#FACC15] font-bold drop-shadow-md">/ VISUALS</span>
@@ -70,14 +72,20 @@
                 <a href="#contact" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">CONTACT</a>
             </nav>
             
-            <!-- Mobile Menu -->
-            <div class="md:hidden text-xs font-bold border-2 border-[#FACC15] text-[#FACC15] px-3 py-1 rounded-full cursor-pointer hover:bg-[#FACC15] hover:text-[#4E342E] transition-colors shadow-md">
+            <button id="mobile-menu-btn" class="md:hidden text-xs font-bold border-2 border-[#FACC15] text-[#FACC15] px-3 py-1 rounded-full cursor-pointer hover:bg-[#FACC15] hover:text-[#4E342E] transition-colors shadow-md z-50 relative">
                 MENU
-            </div>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full bg-[#4E342E] py-20 px-6 shadow-xl transform origin-top md:hidden">
+            <nav class="flex flex-col gap-6 text-center text-lg font-bold text-[#FACC15]">
+                <a href="#works" class="mobile-link hover:text-white transition-colors">WORKS</a>
+                <a href="#about" class="mobile-link hover:text-white transition-colors">ABOUT</a>
+                <a href="#contact" class="mobile-link hover:text-white transition-colors">CONTACT</a>
+            </nav>
         </div>
     </header>
 
-    <!-- === Hero Section === -->
     <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32">
         <div class="text-center space-y-6 max-w-4xl animate-fade-in-up relative z-10">
             <p class="text-sm md:text-base tracking-[0.2em] font-bold text-[#8D6E63]">VIDEO CREATOR / MOTION DESIGNER</p>
@@ -96,7 +104,6 @@
         </div>
     </section>
 
-    <!-- === Works Section === -->
     <section id="works" class="py-24 px-6 container mx-auto relative z-20">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
@@ -113,11 +120,9 @@
         </div>
 
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            <!-- Works injected via JS -->
-        </div>
+            </div>
     </section>
 
-    <!-- === About Section === -->
     <section id="about" class="py-24 bg-white relative overflow-hidden">
         <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#FFF9C4] to-transparent opacity-50"></div>
         
@@ -156,7 +161,6 @@
         </div>
     </section>
 
-    <!-- === Contact Section === -->
     <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center">
         <h3 class="text-4xl font-bold mb-8 text-[#4E342E]">Let's create something delicious.</h3>
         <p class="text-[#8D6E63] mb-12 font-medium">
@@ -169,7 +173,6 @@
         </a>
     </section>
 
-    <!-- === Footer === -->
     <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1]">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex gap-6">
@@ -182,7 +185,6 @@
         </div>
     </footer>
 
-    <!-- === Modal === -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
         <div id="modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="modal-panel">
@@ -213,35 +215,35 @@
         </div>
     </div>
 
-    <!-- === JavaScript Logic === -->
     <script>
-        // === Works Data ===
+        // === Works Data (修正版) ===
+        // 修正点：カンマの追加、全角スペースの削除
         const WORKS = [
             { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },
             { id: 2, title: "喜劇的な完敗を　|　OFFICIAL VIDEO", category: "Music Video", type: "mv", year: "2022", client: "Aoto", description: "", color: "bg-[#FBC02D]", youtubeId: "Hn_u9hPLGlk" },
             { id: 3, title: "New Single 「六の目」　|　Teaser Movie", category: "Jacket", type: "Jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "eH2xEUnO7iE" },
             { id: 4, title: "六の目(Sixth)　|　Live MV / 縹 ワンマンライブ 「摩天楼」 at IMAIKE GROW", category: "Lyric Motion", type: "lyric", year: "2023", client: "Aoto", description: "", color: "bg-[#FDD835]", youtubeId: "LfaL82c1ep0" },
             { id: 5, title: "7th Single 『Not Bad!!』　|　Teaser Movie", category: "Jacket", type: "jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#3E2723]", youtubeId: "AtVfLB7q4NU" },
-            { id: 6, title: "永遠語り～El Ragna～ / Cover 魔狼ミリヤ×古守ちゆ", category: "Music Video", type: "mv", year: "2025", client: "魔狼ミリヤ", description: "", color: "bg-[#FFEB3B]", youtubeId: "X5N6dfAGQm4" }
-　　　　　　{ id: 7, title: "滲む視界だけがあなたの薫りで", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#795548]", youtubeId: "fd7avYOUCRc" },
+            { id: 6, title: "永遠語り～El Ragna～ / Cover 魔狼ミリヤ×古守ちゆ", category: "Music Video", type: "mv", year: "2025", client: "魔狼ミリヤ", description: "", color: "bg-[#FFEB3B]", youtubeId: "X5N6dfAGQm4" },
+            { id: 7, title: "滲む視界だけがあなたの薫りで", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#795548]", youtubeId: "fd7avYOUCRc" },
             { id: 8, title: "【歌ってみた】とても素敵な六月でした / Eight【サユリ】", category: "Music Video", type: "mv", year: "2025", client: "サユリ", description: "", color: "bg-[#FDD835]", youtubeId: "LAY-PqYGTs0" },
             { id: 9, title: "一番の宝物 ～Yui final ver.～ / Girls Dead Monster STARRING LiSA Covered by 涼風しとら【歌ってみた】", category: "Music Video", type: "mv", year: "2025", client: "涼風しとら", description: "", color: "bg-[#3E2723]", youtubeId: "A6edM9HX21A" },
-            { id: 10, title: "栞 / 初音ミク", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#FFEB3B]", youtubeId: "irVR-7sUt_U" }
-　　　　　　{ id: 11, title: "Aoto 『Third Party』 Music Video", category: "Music Video", type: "mv", year: "2025", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "OLCj82iL5IM" },
-            { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", color: "bg-[#FDD835]", youtubeId: "HLhFFwyE7L4" },
+            { id: 10, title: "栞 / 初音ミク", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#FFEB3B]", youtubeId: "irVR-7sUt_U" },
+            { id: 11, title: "Aoto 『Third Party』 Music Video", category: "Music Video", type: "mv", year: "2025", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "OLCj82iL5IM" },
+            { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", color: "bg-[#FDD835]", youtubeId: "HLhFFwyE7L4" }
         ];
 
         // === 1. 物理演算の波（Liquid Wave） ===
         class ChocolateWave {
             constructor(selector) {
                 this.path = document.querySelector(selector);
-                this.points = 16; // 頂点数を増やしてより滑らかに
+                this.points = 16; 
                 this.baseHeight = 140; 
                 this.width = window.innerWidth;
                 
-                // 物理パラメータ（どろっとした重さを表現）
-                this.viscosity = 0.08; // 粘性：低いとサラサラ、高いとネバネバ
-                this.damping = 0.85;   // 減衰：低いといつまでも揺れる、高いとすぐ止まる
+                // 物理パラメータ
+                this.viscosity = 0.08; 
+                this.damping = 0.85;   
                 
                 this.nodes = [];
                 this.scrollSpeed = 0;
@@ -260,7 +262,6 @@
                         y: this.baseHeight,
                         baseY: this.baseHeight,
                         vy: 0,
-                        // 各頂点にランダムなオフセットを持たせ、不規則な波を作る
                         phase: Math.random() * Math.PI * 2 
                     });
                 }
@@ -277,7 +278,6 @@
                 window.addEventListener('scroll', () => {
                     const currentY = window.scrollY;
                     const diff = currentY - this.lastScrollY;
-                    // スクロールの勢いを計算（上限あり）
                     let speed = diff * 0.5;
                     if(speed > 40) speed = 40;
                     if(speed < -40) speed = -40;
@@ -288,23 +288,12 @@
 
             update() {
                 this.time += 0.02; 
-                
-                // スクロール速度の減衰（慣性）
                 this.scrollSpeed *= 0.9;
 
                 this.nodes.forEach((node, i) => {
-                    // 基本のゆらぎ（サイン波の合成）
                     const wave = Math.sin(this.time + node.phase) * 10 + Math.sin(this.time * 2 + i) * 5;
-                    
-                    // スクロール時の「重さ」表現
-                    // 下にスクロール（speed > 0）→ コンテンツは上に移動 → 液体はその場に留まろうとする（上に伸びる）
-                    // 逆に、止まると重力で下に戻る
-                    // ここでは、「目標位置」をスクロール速度に応じてずらす
                     const inertiaY = this.baseHeight - (this.scrollSpeed * 1.5); 
-                    
                     const targetY = inertiaY + wave;
-                    
-                    // バネ物理演算
                     const force = (targetY - node.y) * this.viscosity;
                     node.vy += force;
                     node.vy *= this.damping;
@@ -315,7 +304,6 @@
             draw() {
                 let d = `M 0 0 L 0 ${this.nodes[0].y}`;
                 
-                // 滑らかな曲線（Catmull-Romスプラインの簡易版、または中点ベジェ）
                 for (let i = 0; i < this.nodes.length - 1; i++) {
                     const p0 = this.nodes[i];
                     const p1 = this.nodes[i + 1];
@@ -348,7 +336,6 @@
             document.getElementById('year').textContent = new Date().getFullYear();
             renderWorks('all');
             
-            // アニメーション開始
             wave = new ChocolateWave('#liquid-path');
             animate();
             
@@ -363,6 +350,24 @@
                     e.target.classList.remove('text-[#8D6E63]', 'hover:text-[#4E342E]');
                     e.target.classList.add('bg-[#4E342E]', 'text-[#FACC15]');
                     renderWorks(e.target.getAttribute('data-filter'));
+                });
+            });
+
+            // モバイルメニュー（簡易実装）
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            if(mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // リンククリックで閉じる
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
                 });
             });
         });
@@ -410,6 +415,7 @@
             document.getElementById('modal-client').textContent = work.client;
             document.getElementById('modal-year').textContent = work.year;
             const videoArea = document.getElementById('modal-video-area');
+            // YouTube埋め込みなどをする場合はここを変更しますが、今回はプレビュー画面のままにします
             videoArea.className = `w-full aspect-video ${work.color} flex items-center justify-center shrink-0 border-b-2 border-[#FACC15]`;
             videoArea.innerHTML = `<div class="text-white text-center"><i data-lucide="play" class="w-16 h-16 mx-auto opacity-80 mb-4 fill-current"></i><span class="font-bold tracking-widest text-xl">VIDEO PREVIEW</span></div>`;
             lucide.createIcons();

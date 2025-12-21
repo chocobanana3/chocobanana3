@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocobanana3 Works - Portfolio</title>
     
-    <!-- ★★★ SNSシェア用設定 (OGP) ★★★ -->
+    <link rel="icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
     <meta name="description" content="映像クリエイター Chocobanana3のポートフォリオサイト。3DCGとリリックモーションを中心にMVを制作しています。">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@choco3_eizo">
@@ -15,12 +17,9 @@
     <meta property="og:description" content="Creating Music Videos with 3DCG & Lyric Motion.">
     <meta property="og:image" content="https://your-portfolio-url.com/ogp-image.jpg">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Google Fonts: Zen丸ゴシック -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
@@ -115,7 +114,6 @@
 </head>
 <body class="text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E] relative">
 
-    <!-- === 背景用レイヤー（ドットパターン専用） === -->
     <div class="fixed inset-0 pointer-events-none z-0" style="
         background-image: radial-gradient(rgba(141, 110, 99, 0.15) 1px, transparent 1px);
         background-size: 20px 20px;
@@ -124,35 +122,29 @@
         -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
     "></div>
 
-    <!-- === Liquid Chocolate Header (JS Controlled) === -->
     <div id="liquid-header-container">
         <svg id="liquid-svg" width="100%" height="100%" style="overflow: visible;">
             <path id="liquid-path" fill="#4E342E" d=""></path>
         </svg>
     </div>
 
-    <!-- === Header Content === -->
     <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
         <div class="container mx-auto px-6 flex justify-between items-center relative">
-            <!-- ロゴ -->
             <h1 class="text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                 <span class="bg-[#FACC15] text-[#4E342E] px-2 py-1 transform -skew-x-12 inline-block border-2 border-[#FACC15] group-hover:bg-white group-hover:text-[#4E342E] transition-colors shadow-lg">Chocobanana3</span>
                 <span class="text-[#FACC15] font-bold drop-shadow-md">Works</span>
             </h1>
             
-            <!-- PC Nav (ABOUT削除済み) -->
             <nav class="hidden md:flex gap-8 text-sm tracking-wide font-bold">
                 <a href="#works" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">WORKS</a>
                 <a href="#contact" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">CONTACT</a>
             </nav>
             
-            <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn" class="md:hidden text-xs font-bold border-2 border-[#FACC15] text-[#FACC15] px-3 py-1 rounded-full cursor-pointer hover:bg-[#FACC15] hover:text-[#4E342E] transition-colors shadow-md z-50 relative">
                 MENU
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay (ABOUT削除済み) -->
         <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full bg-[#4E342E]/95 backdrop-blur-sm py-24 px-6 shadow-xl transform origin-top md:hidden z-40">
             <nav class="flex flex-col gap-8 text-center text-xl font-bold text-[#FACC15]">
                 <a href="#works" class="mobile-link hover:text-white transition-colors">WORKS</a>
@@ -164,9 +156,7 @@
         </div>
     </header>
 
-    <!-- === Hero Section === -->
     <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32 overflow-hidden z-10">
-        <!-- 背景のポップな装飾 + カラースプレー -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-1/4 left-10 w-4 h-4 bg-[#FACC15] rounded-full animate-bounce delay-100"></div>
             <div class="absolute bottom-1/3 right-10 w-6 h-6 bg-[#4E342E] opacity-20 transform rotate-45"></div>
@@ -213,7 +203,6 @@
         </div>
     </section>
 
-    <!-- === Works Section === -->
     <section id="works" class="py-24 px-6 container mx-auto relative z-10">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
@@ -230,11 +219,9 @@
         </div>
 
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Works injected via JS -->
-        </div>
+            </div>
     </section>
 
-    <!-- === Contact Section === -->
     <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center relative z-10">
         <button id="open-contact-btn" class="inline-flex items-center gap-3 bg-[#4E342E] text-[#FACC15] px-10 py-5 rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer">
             <i data-lucide="mail" class="w-5 h-5"></i>
@@ -242,7 +229,6 @@
         </button>
     </section>
 
-    <!-- === Footer === -->
     <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1] relative z-10">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex gap-6">
@@ -255,12 +241,10 @@
         </div>
     </footer>
 
-    <!-- スクロールトップボタン -->
     <button id="scroll-to-top" class="fixed bottom-8 right-8 bg-[#FACC15] text-[#4E342E] p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-[#4E342E] hover:text-[#FACC15] z-40 transform translate-y-4">
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </button>
 
-    <!-- === Works Modal (Work Details) === -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
         <div id="modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="modal-panel">
@@ -291,7 +275,6 @@
         </div>
     </div>
 
-    <!-- === Contact Modal === -->
     <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div id="contact-modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-lg relative shadow-2xl rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="contact-modal-panel">
@@ -306,15 +289,10 @@
                 </h3>
                 
                 <form action="https://formsubmit.co/chocoba3.works@gmail.com" method="POST" class="space-y-5">
-                    <!-- スパム対策 -->
                     <input type="hidden" name="_captcha" value="false">
-                    <!-- メールの見た目を表形式に -->
                     <input type="hidden" name="_template" value="table">
-                    <!-- 件名を指定 -->
                     <input type="hidden" name="_subject" value="ポートフォリオサイトからのお問い合わせ">
-                    <!-- ★送信後に元のページに戻る設定 (JSで値を入れます) -->
                     <input type="hidden" name="_next" id="next-redirect" value="">
-                    <!-- ★自動返信メールの文言設定 -->
                     <input type="hidden" name="_autoresponse" value="お問い合わせありがとうございます。内容を確認次第、ご連絡いたします。">
 
                     <div>
@@ -339,7 +317,6 @@
         </div>
     </div>
 
-    <!-- === JavaScript Logic === -->
     <script>
         // ★送信後に戻るURLを現在のページに自動設定
         document.getElementById('next-redirect').value = window.location.href;
@@ -370,7 +347,7 @@
                 
                 // 物理パラメータ
                 this.viscosity = 0.08; 
-                this.damping = 0.85;   
+                this.damping = 0.85;    
                 
                 this.nodes = [];
                 this.scrollSpeed = 0;

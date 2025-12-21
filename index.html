@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocobanana3 Works - Portfolio</title>
+    
+    <!-- ★★★ SNSシェア用設定 (OGP) ★★★ -->
+    <meta name="description" content="映像クリエイター Chocobanana3のポートフォリオサイト。3DCGとリリックモーションを中心にMVを制作しています。">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@choco3_eizo">
+    <meta name="twitter:creator" content="@choco3_eizo">
+    <meta property="og:url" content="https://your-portfolio-url.com">
+    <meta property="og:title" content="Chocobanana3 Works">
+    <meta property="og:description" content="Creating Music Videos with 3DCG & Lyric Motion.">
+    <meta property="og:image" content="https://your-portfolio-url.com/ogp-image.jpg">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Google Fonts: Zen丸ゴシック -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
@@ -15,6 +29,7 @@
         /* フォント設定 */
         body {
             font-family: "Zen Maru Gothic", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #FFFCF5;
         }
 
         /* 基本アニメーション */
@@ -24,6 +39,15 @@
         }
         .animate-fade-in-up {
             animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* カラースプレー（スプリンクル）のスタイル */
+        .sprinkle {
+            position: absolute;
+            width: 12px;
+            height: 4px;
+            border-radius: 2px;
+            opacity: 0.8;
         }
 
         /* スクロールバー */
@@ -51,14 +75,6 @@
             filter: drop-shadow(0 4px 6px rgba(78, 52, 46, 0.4));
         }
 
-        /* モバイルメニュー用 */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-        }
-        #mobile-menu.hidden {
-            display: none;
-        }
-        
         /* フォームのスタイル調整 */
         .form-input {
             width: 100%;
@@ -75,47 +91,95 @@
             border-color: #FACC15;
             background-color: #FFFFFF;
         }
+
+        /* モバイルメニューのアニメーション */
+        .mobile-menu-enter {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .mobile-menu-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .mobile-menu-exit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu-exit-active {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-[#FFFCF5] text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E]">
+<body class="text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E] relative">
 
+    <!-- === 背景用レイヤー（ドットパターン専用） === -->
+    <div class="fixed inset-0 pointer-events-none z-0" style="
+        background-image: radial-gradient(rgba(141, 110, 99, 0.15) 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-position: center center;
+        mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+        -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+    "></div>
+
+    <!-- === Liquid Chocolate Header (JS Controlled) === -->
     <div id="liquid-header-container">
         <svg id="liquid-svg" width="100%" height="100%" style="overflow: visible;">
             <path id="liquid-path" fill="#4E342E" d=""></path>
         </svg>
     </div>
 
+    <!-- === Header Content === -->
     <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
         <div class="container mx-auto px-6 flex justify-between items-center relative">
+            <!-- ロゴ -->
             <h1 class="text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                 <span class="bg-[#FACC15] text-[#4E342E] px-2 py-1 transform -skew-x-12 inline-block border-2 border-[#FACC15] group-hover:bg-white group-hover:text-[#4E342E] transition-colors shadow-lg">Chocobanana3</span>
                 <span class="text-[#FACC15] font-bold drop-shadow-md">Works</span>
             </h1>
             
+            <!-- PC Nav (ABOUT削除済み) -->
             <nav class="hidden md:flex gap-8 text-sm tracking-wide font-bold">
                 <a href="#works" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">WORKS</a>
-                <a href="#about" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">ABOUT</a>
                 <a href="#contact" class="text-[#FFF9C4] hover:text-[#FACC15] transition-colors drop-shadow-sm">CONTACT</a>
             </nav>
             
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn" class="md:hidden text-xs font-bold border-2 border-[#FACC15] text-[#FACC15] px-3 py-1 rounded-full cursor-pointer hover:bg-[#FACC15] hover:text-[#4E342E] transition-colors shadow-md z-50 relative">
                 MENU
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full bg-[#4E342E] py-20 px-6 shadow-xl transform origin-top md:hidden">
-            <nav class="flex flex-col gap-6 text-center text-lg font-bold text-[#FACC15]">
+        <!-- Mobile Menu Overlay (ABOUT削除済み) -->
+        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full bg-[#4E342E]/95 backdrop-blur-sm py-24 px-6 shadow-xl transform origin-top md:hidden z-40">
+            <nav class="flex flex-col gap-8 text-center text-xl font-bold text-[#FACC15]">
                 <a href="#works" class="mobile-link hover:text-white transition-colors">WORKS</a>
-                <a href="#about" class="mobile-link hover:text-white transition-colors">ABOUT</a>
                 <a href="#contact" class="mobile-link hover:text-white transition-colors">CONTACT</a>
+                <div class="flex justify-center gap-6 mt-4">
+                    <a href="https://x.com/choco3_eizo" target="_blank" class="text-[#FACC15] hover:text-white"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- === Hero Section === -->
+    <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32 overflow-hidden z-10">
+        <!-- 背景のポップな装飾 + カラースプレー -->
+        <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-1/4 left-10 w-4 h-4 bg-[#FACC15] rounded-full animate-bounce delay-100"></div>
             <div class="absolute bottom-1/3 right-10 w-6 h-6 bg-[#4E342E] opacity-20 transform rotate-45"></div>
+            
+            <div class="sprinkle bg-[#FF6B6B] top-[20%] left-[15%] rotate-[30deg]"></div>
+            <div class="sprinkle bg-[#4ECDC4] top-[35%] right-[20%] rotate-[-45deg]"></div>
+            <div class="sprinkle bg-[#FACC15] bottom-[30%] left-[25%] rotate-[60deg]"></div>
+            <div class="sprinkle bg-[#FF6B6B] bottom-[25%] right-[30%] rotate-[15deg]"></div>
+            <div class="sprinkle bg-[#4ECDC4] top-[50%] left-[10%] rotate-[-30deg]"></div>
+            <div class="sprinkle bg-[#FACC15] top-[15%] right-[35%] rotate-[45deg]"></div>
+            <div class="absolute w-2 h-2 bg-[#FF6B6B] rounded-full top-[40%] left-[30%] opacity-80"></div>
+            <div class="absolute w-2 h-2 bg-[#4ECDC4] rounded-full bottom-[45%] right-[25%] opacity-80"></div>
+            <div class="absolute w-2 h-2 bg-[#FACC15] rounded-full top-[60%] right-[15%] opacity-80"></div>
         </div>
 
         <div class="text-center space-y-8 max-w-5xl animate-fade-in-up relative z-10">
@@ -125,7 +189,7 @@
                 </span>
             </div>
 
-            <h2 class="text-2xl md:text-5xl lg:text-6xl font-black leading-relaxed tracking-wider text-[#4E342E] break-keep">
+            <h2 class="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-black leading-normal md:leading-relaxed tracking-wider text-[#4E342E] break-keep">
                 3DCGとリリックモーションを中心に<br>
                 <span class="relative inline-block mt-2 px-2">
                     <span class="relative z-10">MVを制作しています。</span>
@@ -144,12 +208,13 @@
             </div>
         </div>
         
-        <div class="absolute bottom-12 animate-bounce">
+        <div class="absolute bottom-12 animate-bounce cursor-pointer" onclick="document.getElementById('works').scrollIntoView({behavior: 'smooth'})">
             <i data-lucide="chevron-down" class="w-8 h-8 text-[#8D6E63]"></i>
         </div>
     </section>
 
-    <section id="works" class="py-24 px-6 container mx-auto relative z-20">
+    <!-- === Works Section === -->
+    <section id="works" class="py-24 px-6 container mx-auto relative z-10">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
                 <h3 class="text-3xl font-bold mb-2 border-l-4 border-[#FACC15] pl-4 text-[#4E342E]">WORKS</h3>
@@ -165,54 +230,20 @@
         </div>
 
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            </div>
-    </section>
-
-    <section id="about" class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#FFF9C4] to-transparent opacity-50"></div>
-        <svg class="absolute -bottom-10 -right-10 w-64 h-64 text-[#FACC15] opacity-20 transform rotate-12" viewBox="0 0 100 100">
-             <path fill="currentColor" d="M20,80 Q50,90 80,50 Q90,20 70,10 Q60,5 50,20 Q30,60 20,80 Z" />
-        </svg>
-
-        <div class="container mx-auto px-6 max-w-5xl relative z-10">
-            <div class="grid md:grid-cols-2 gap-16 items-start">
-                <div>
-                    <h3 class="text-sm font-bold tracking-widest text-[#8D6E63] mb-8 sticky top-48">ABOUT ME</h3>
-                </div>
-                <div class="space-y-12">
-                    <div>
-                        <h4 class="text-3xl font-bold mb-6 text-[#4E342E]">映像で、<br>甘くほろ苦い余韻を。</h4>
-                        <p class="leading-loose text-[#5D4037] mb-6 font-medium">
-                            <strong class="bg-[#FACC15]/30 px-1">ちょこばなな / CHOCOBANANA</strong><br>
-                            東京を拠点に活動する映像クリエイター。<br><br>
-                            
-                            ポップな可愛らしさから、ダークでクールな表現まで。
-                            まるでチョコレートとバナナのように、
-                            異なる要素を組み合わせて新しい「おいしさ」＝「映像体験」を作ります。
-                        </p>
-                    </div>
-
-                    <div>
-                        <h5 class="text-sm font-bold border-b-2 border-[#FACC15] inline-block pb-1 mb-6 text-[#4E342E]">SKILLS / TOOLS</h5>
-                        <ul class="grid grid-cols-2 gap-4 text-sm font-medium text-[#5D4037]">
-                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>After Effects</li>
-                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>Blender</li>
-                            <li class="flex items-center gap-2"><div class="w-2 h-2 bg-[#FACC15] rounded-full"></div>TouchDesigner</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!-- Works injected via JS -->
         </div>
     </section>
 
-    <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center">
+    <!-- === Contact Section === -->
+    <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center relative z-10">
         <button id="open-contact-btn" class="inline-flex items-center gap-3 bg-[#4E342E] text-[#FACC15] px-10 py-5 rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer">
             <i data-lucide="mail" class="w-5 h-5"></i>
             <span>お問い合わせフォーム</span>
         </button>
     </section>
 
-    <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1]">
+    <!-- === Footer === -->
+    <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1] relative z-10">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex gap-6">
                 <a href="https://x.com/choco3_eizo" target="_blank" class="text-[#8D6E63] hover:text-[#4E342E] transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
@@ -224,13 +255,19 @@
         </div>
     </footer>
 
+    <!-- スクロールトップボタン -->
+    <button id="scroll-to-top" class="fixed bottom-8 right-8 bg-[#FACC15] text-[#4E342E] p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-[#4E342E] hover:text-[#FACC15] z-40 transform translate-y-4">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- === Works Modal (Work Details) === -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
         <div id="modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="modal-panel">
             <button id="close-modal" class="absolute top-4 right-4 p-2 bg-[#4E342E] text-[#FACC15] rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] z-10 transition-colors">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <div id="modal-video-area" class="w-full aspect-video bg-black flex items-center justify-center shrink-0 border-b-2 border-[#FACC15]"></div>
+            <div id="modal-video-area" class="w-full aspect-video bg-[#EFEBE9] flex items-center justify-center shrink-0 border-b-2 border-[#FACC15] overflow-hidden"></div>
             <div class="p-8 md:p-12 grid md:grid-cols-3 gap-12 text-[#4E342E]">
                 <div class="md:col-span-2">
                     <h2 id="modal-title" class="text-3xl font-bold mb-4">Title</h2>
@@ -254,6 +291,7 @@
         </div>
     </div>
 
+    <!-- === Contact Modal === -->
     <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div id="contact-modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-lg relative shadow-2xl rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="contact-modal-panel">
@@ -291,12 +329,13 @@
         </div>
     </div>
 
+    <!-- === JavaScript Logic === -->
     <script>
         // === Works Data ===
         const WORKS = [
             { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },
             { id: 2, title: "喜劇的な完敗を　|　OFFICIAL VIDEO", category: "Music Video", type: "mv", year: "2022", client: "Aoto", description: "", color: "bg-[#FBC02D]", youtubeId: "Hn_u9hPLGlk" },
-            { id: 3, title: "New Single 「六の目」　|　Teaser Movie", category: "Jacket", type: "Jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "eH2xEUnO7iE" },
+            { id: 3, title: "New Single 「六の目」　|　Teaser Movie", category: "Jacket", type: "jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "eH2xEUnO7iE" },
             { id: 4, title: "六の目(Sixth)　|　Live MV / 縹 ワンマンライブ 「摩天楼」 at IMAIKE GROW", category: "Lyric Motion", type: "lyric", year: "2023", client: "Aoto", description: "", color: "bg-[#FDD835]", youtubeId: "LfaL82c1ep0" },
             { id: 5, title: "7th Single 『Not Bad!!』　|　Teaser Movie", category: "Jacket", type: "jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#3E2723]", youtubeId: "AtVfLB7q4NU" },
             { id: 6, title: "永遠語り～El Ragna～ / Cover 魔狼ミリヤ×古守ちゆ", category: "Music Video", type: "mv", year: "2025", client: "魔狼ミリヤ", description: "", color: "bg-[#FFEB3B]", youtubeId: "X5N6dfAGQm4" },
@@ -305,7 +344,7 @@
             { id: 9, title: "一番の宝物 ～Yui final ver.～ / Girls Dead Monster STARRING LiSA Covered by 涼風しとら【歌ってみた】", category: "Music Video", type: "mv", year: "2025", client: "涼風しとら", description: "", color: "bg-[#3E2723]", youtubeId: "A6edM9HX21A" },
             { id: 10, title: "栞 / 初音ミク", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#FFEB3B]", youtubeId: "irVR-7sUt_U" },
             { id: 11, title: "Aoto 『Third Party』 Music Video", category: "Music Video", type: "mv", year: "2025", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "OLCj82iL5IM" },
-            { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", color: "bg-[#FDD835]", youtubeId: "HLhFFwyE7L4" }
+            { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", youtubeId: "HLhFFwyE7L4" }
         ];
 
         // === 1. 物理演算の波（Liquid Wave） ===
@@ -428,21 +467,75 @@
                 });
             });
 
-            // モバイルメニュー
+            // モバイルメニュー（フェードインアニメーション）
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
 
             if(mobileBtn) {
                 mobileBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenu.classList.remove('mobile-menu-exit-active');
+                        mobileMenu.classList.add('mobile-menu-enter');
+                        setTimeout(() => {
+                            mobileMenu.classList.remove('mobile-menu-enter');
+                            mobileMenu.classList.add('mobile-menu-enter-active');
+                        }, 10);
+                    } else {
+                        mobileMenu.classList.remove('mobile-menu-enter-active');
+                        mobileMenu.classList.add('mobile-menu-exit-active');
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
+                    }
                 });
             }
             
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('mobile-menu-enter-active');
+                    mobileMenu.classList.add('mobile-menu-exit-active');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
                 });
+            });
+
+            // ★★★ 修正点：JavaScriptによるスムーススクロールの実装 ★★★
+            // デフォルトのアンカー移動をキャンセルし、JSでスクロールさせる
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // デフォルトの動作（リロードなど）を防ぐ
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = 80; // ヘッダーの高さ分ずらす
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+
+            // スクロールトップボタンの制御
+            const scrollTopBtn = document.getElementById('scroll-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                } else {
+                    scrollTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                }
+            });
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
             // Contact Modal Setup
@@ -477,7 +570,7 @@
             if(contactBackdrop) contactBackdrop.addEventListener('click', closeContact);
         });
 
-        // Works Render (Updated for Overlay)
+        // Works Render
         const gridContainer = document.getElementById('works-grid');
         function renderWorks(filterType) {
             gridContainer.innerHTML = '';
@@ -485,12 +578,18 @@
             const filteredWorks = [...worksSource].reverse();
 
             filteredWorks.forEach(work => {
-                const thumbnailUrl = `https://img.youtube.com/vi/${work.youtubeId}/maxresdefault.jpg`;
+                let thumbnailUrl = '';
+                if (work.customThumb) {
+                    thumbnailUrl = work.customThumb;
+                } else if (work.youtubeId) {
+                    thumbnailUrl = `https://img.youtube.com/vi/${work.youtubeId}/maxresdefault.jpg`;
+                } else {
+                    thumbnailUrl = 'https://via.placeholder.com/640x360?text=No+Image';
+                }
 
                 const workEl = document.createElement('div');
                 workEl.className = 'group cursor-pointer block animate-fade-in-up relative overflow-hidden rounded-xl shadow-lg';
                 
-                // Overlay Design
                 workEl.innerHTML = `
                     <div class="aspect-video w-full bg-[#EFEBE9] relative overflow-hidden">
                         <img src="${thumbnailUrl}" alt="${work.title}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" onerror="this.src='https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg'">
@@ -510,7 +609,7 @@
                             </p>
 
                             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100 delay-75">
-                                <i data-lucide="play" class="w-8 h-8 text-white fill-current ml-1"></i>
+                                <i data-lucide="${work.youtubeId ? 'play' : 'image'}" class="w-8 h-8 text-white fill-current ml-1"></i>
                             </div>
                         </div>
                     </div>`;
@@ -537,8 +636,10 @@
             
             if(work.youtubeId) {
                 videoArea.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${work.youtubeId}?autoplay=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (work.customThumb) {
+                videoArea.innerHTML = `<img src="${work.customThumb}" class="w-full h-full object-contain">`;
             } else {
-                videoArea.innerHTML = `<div class="text-white">No Video ID</div>`;
+                videoArea.innerHTML = `<div class="text-[#8D6E63] font-bold">No Video Available</div>`;
             }
 
             lucide.createIcons();

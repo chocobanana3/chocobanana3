@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@choco3_eizo">
     <meta name="twitter:creator" content="@choco3_eizo">
-    <meta property="og:url" content="https://your-portfolio-url.com">
+    <meta property="og:url" content="https://chocobanana3.works">
     <meta property="og:title" content="Chocobanana3 Works">
     <meta property="og:description" content="Creating Music Videos with 3DCG & Lyric Motion.">
     <meta property="og:image" content="https://your-portfolio-url.com/ogp-image.jpg">
@@ -130,7 +130,7 @@
 
     <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
         <div class="container mx-auto px-6 flex justify-between items-center relative">
-            <h1 class="text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <h1 class="js-scroll-top text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group">
                 <span class="bg-[#FACC15] text-[#4E342E] px-2 py-1 transform -skew-x-12 inline-block border-2 border-[#FACC15] group-hover:bg-white group-hover:text-[#4E342E] transition-colors shadow-lg">Chocobanana3</span>
                 <span class="text-[#FACC15] font-bold drop-shadow-md">Works</span>
             </h1>
@@ -345,7 +345,6 @@
                 this.baseHeight = 140; 
                 this.width = window.innerWidth;
                 
-                // 物理パラメータ
                 this.viscosity = 0.08; 
                 this.damping = 0.85;    
                 
@@ -457,7 +456,7 @@
                 });
             });
 
-            // モバイルメニュー（フェードインアニメーション）
+            // モバイルメニュー制御
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -492,18 +491,19 @@
                 });
             });
 
-            // ★★★ 修正点：JavaScriptによるスムーススクロールの実装 ★★★
-            // デフォルトのアンカー移動をキャンセルし、JSでスクロールさせる
+            // ★★★ URLを変えずにスムーススクロールさせる統合設定 ★★★
+            
+            // 1. メニューなどのページ内リンク (href="#...")
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // デフォルトの動作（リロードなど）を防ぐ
+                    e.preventDefault(); // ★重要：URLに #works 等がつくのを防ぐ
                     
                     const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+                    if (targetId === '#' || targetId === '') return;
 
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        const headerHeight = 80; // ヘッダーの高さ分ずらす
+                        const headerHeight = 80; // ヘッダーの高さ分調整
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.scrollY - headerHeight;
 
@@ -515,7 +515,18 @@
                 });
             });
 
-            // スクロールトップボタンの制御
+            // 2. ロゴをクリックした時の処理 (トップへ戻る)
+            document.querySelectorAll('.js-scroll-top').forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    // URLは変えずにトップへ戻る
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                });
+            });
+
+            // 3. 右下の「トップへ戻るボタン」の処理
             const scrollTopBtn = document.getElementById('scroll-to-top');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 500) {

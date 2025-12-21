@@ -306,9 +306,17 @@
                 </h3>
                 
                 <form action="https://formsubmit.co/chocoba3.works@gmail.com" method="POST" class="space-y-5">
+                    <!-- スパム対策 -->
                     <input type="hidden" name="_captcha" value="false">
+                    <!-- メールの見た目を表形式に -->
                     <input type="hidden" name="_template" value="table">
+                    <!-- 件名を指定 -->
                     <input type="hidden" name="_subject" value="ポートフォリオサイトからのお問い合わせ">
+                    <!-- ★送信後に元のページに戻る設定 (JSで値を入れます) -->
+                    <input type="hidden" name="_next" id="next-redirect" value="">
+                    <!-- ★自動返信メールの文言設定 -->
+                    <input type="hidden" name="_autoresponse" value="お問い合わせありがとうございます。内容を確認次第、ご連絡いたします。">
+
                     <div>
                         <label class="block text-xs font-bold text-[#8D6E63] mb-2 tracking-wider">NAME</label>
                         <input type="text" name="name" required class="form-input" placeholder="お名前">
@@ -333,6 +341,9 @@
 
     <!-- === JavaScript Logic === -->
     <script>
+        // ★送信後に戻るURLを現在のページに自動設定
+        document.getElementById('next-redirect').value = window.location.href;
+
         // === Works Data ===
         const WORKS = [
             { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },

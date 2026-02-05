@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocobanana3 Works - Portfolio</title>
     
-    <!-- ★★★ 修正箇所：ファビコン設定（バナナ絵文字を使用） ★★★ -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍌</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23FACC15%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2270%22>🍌</text></svg>">
     
-    <!-- OGP設定 -->
     <meta name="description" content="映像クリエイター Chocobanana3のポートフォリオサイト。3DCGとリリックモーションを中心にMVを制作しています。">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@choco3_eizo">
@@ -116,7 +114,6 @@
 </head>
 <body class="text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E] relative">
 
-    <!-- 背景用レイヤー -->
     <div class="fixed inset-0 pointer-events-none z-0" style="
         background-image: radial-gradient(rgba(141, 110, 99, 0.15) 1px, transparent 1px);
         background-size: 20px 20px;
@@ -125,14 +122,12 @@
         -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
     "></div>
 
-    <!-- Liquid Chocolate Header -->
     <div id="liquid-header-container">
         <svg id="liquid-svg" width="100%" height="100%" style="overflow: visible;">
             <path id="liquid-path" fill="#4E342E" d=""></path>
         </svg>
     </div>
 
-    <!-- Header -->
     <header id="header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 md:py-8">
         <div class="container mx-auto px-6 flex justify-between items-center relative">
             <h1 class="js-scroll-top text-xl font-bold tracking-widest cursor-pointer flex items-center gap-2 group">
@@ -161,7 +156,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="h-screen flex flex-col justify-center items-center px-6 relative pt-32 overflow-hidden z-10">
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-1/4 left-10 w-4 h-4 bg-[#FACC15] rounded-full animate-bounce delay-100"></div>
@@ -209,7 +203,6 @@
         </div>
     </section>
 
-    <!-- Works Section -->
     <section id="works" class="py-24 px-6 container mx-auto relative z-10">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
@@ -226,19 +219,88 @@
         </div>
 
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Works injected via JS -->
+            </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 container mx-auto relative z-10">
+        <div class="mb-12 md:mb-16">
+            <h3 class="text-3xl font-bold mb-2 border-l-4 border-[#FACC15] pl-4 text-[#4E342E]">CONTACT</h3>
+            <p class="text-[#8D6E63] text-sm pl-5 font-bold tracking-wider">制作のご依頼・ご相談</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            
+            <div class="bg-[#FFF8E1]/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 border-2 border-[#D7CCC8] shadow-lg">
+                <div class="flex flex-wrap justify-between items-end mb-6 border-b-2 border-[#D7CCC8] pb-4 gap-2">
+                    <h4 class="text-lg md:text-xl font-bold text-[#4E342E]">現在の制作スケジュール</h4>
+                    <p class="text-xs font-bold text-[#8D6E63]">2026.02.05 更新</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center group">
+                        <span class="font-bold text-[#5D4037]">3月中旬</span>
+                        <div class="flex items-center gap-2 text-[#9E9E9E] bg-gray-100 px-3 py-1 rounded-full">
+                            <span class="text-xs md:text-sm font-bold">受付終了</span>
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center group">
+                        <span class="font-bold text-[#5D4037]">3月下旬着手〜</span>
+                        <div class="flex items-center gap-2 text-[#F57F17] bg-[#FFF3E0] px-3 py-1 rounded-full">
+                            <span class="text-xs md:text-sm font-bold">残りわずか</span>
+                            <i data-lucide="triangle" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center group">
+                        <span class="font-bold text-[#5D4037]">4月上旬〜</span>
+                        <div class="flex items-center gap-2 text-[#00897B] bg-[#E0F2F1] px-3 py-1 rounded-full">
+                            <span class="text-xs md:text-sm font-bold">受付可能</span>
+                            <i data-lucide="circle" class="w-4 h-4 text-[#00897B]"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mt-6 text-xs text-[#8D6E63] leading-relaxed">
+                    ※ スケジュールは目安です。内容によっては対応可能な場合もございますので、まずはお気軽にご相談ください。
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-10">
+                
+                <div>
+                    <h4 class="text-lg md:text-xl font-bold text-[#4E342E] mb-4 flex items-center gap-2">
+                        <span>ご相談はこちらから！</span>
+                        <span class="text-2xl">🍌</span>
+                    </h4>
+                    <button id="open-contact-btn" class="w-full bg-[#4E342E] text-[#FACC15] py-6 rounded-2xl shadow-[6px_6px_0px_0px_rgba(250,204,21,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all duration-200 font-bold text-xl flex items-center justify-center gap-3 border-2 border-[#4E342E] group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[#FACC15] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 -z-0"></div>
+                        <span class="relative z-10 group-hover:text-[#4E342E] transition-colors flex items-center gap-3">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                            Contact Form
+                        </span>
+                    </button>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-[#8D6E63] mb-4 border-b border-[#D7CCC8] pb-2 inline-block">ご依頼にあたって</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="#" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
+                            <i data-lucide="file-text" class="w-5 h-5 text-[#FACC15] group-hover:scale-110 transition-transform"></i>
+                            <span>ご依頼後の流れ</span>
+                        </a>
+                        <a href="#" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-[#FACC15] group-hover:scale-110 transition-transform"></i>
+                            <span>ご依頼前の<br>確認内容</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 container mx-auto max-w-3xl text-center relative z-10">
-        <button id="open-contact-btn" class="inline-flex items-center gap-3 bg-[#4E342E] text-[#FACC15] px-10 py-5 rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer">
-            <i data-lucide="mail" class="w-5 h-5"></i>
-            <span>お問い合わせフォーム</span>
-        </button>
-    </section>
-
-    <!-- Footer -->
     <footer class="py-12 border-t border-[#D7CCC8] bg-[#FFF8E1] relative z-10">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex gap-6">
@@ -251,12 +313,10 @@
         </div>
     </footer>
 
-    <!-- スクロールトップボタン -->
     <button id="scroll-to-top" class="fixed bottom-8 right-8 bg-[#FACC15] text-[#4E342E] p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-[#4E342E] hover:text-[#FACC15] z-40 transform translate-y-4">
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </button>
 
-    <!-- Modal -->
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
         <div id="modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-5xl h-full max-h-[90vh] relative shadow-2xl overflow-y-auto flex flex-col rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="modal-panel">
@@ -287,7 +347,6 @@
         </div>
     </div>
 
-    <!-- Contact Modal -->
     <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div id="contact-modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
         <div class="bg-[#FFFCF5] w-full max-w-lg relative shadow-2xl rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="contact-modal-panel">
@@ -330,7 +389,6 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
         // 送信後に戻るURLを現在のページに設定
         document.getElementById('next-redirect').value = window.location.href;
@@ -360,7 +418,7 @@
                 this.baseHeight = 140; 
                 this.width = window.innerWidth;
                 this.viscosity = 0.08; 
-                this.damping = 0.85;   
+                this.damping = 0.85;    
                 this.nodes = [];
                 this.scrollSpeed = 0;
                 this.lastScrollY = window.scrollY;

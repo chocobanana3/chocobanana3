@@ -407,7 +407,18 @@
             { id: 10, title: "栞 / 初音ミク", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#FFEB3B]", youtubeId: "irVR-7sUt_U" },
             { id: 11, title: "Aoto 『Third Party』 Music Video", category: "Music Video", type: "mv", year: "2025", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "OLCj82iL5IM" },
             { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", youtubeId: "HLhFFwyE7L4" },
-            { id: 13, title: "5th Original Song/夜明けの翼標", category: "Music Video", type: "mv", year: "2025", client: "濡羽しゅあ", description: "", youtubeId: "pp_fdKzscYw" }
+            { 
+                id: 13, 
+                title: "5th Original Song/夜明けの翼標", 
+                category: "Music Video", 
+                type: "mv", 
+                year: "2025", 
+                client: "濡羽しゅあ", 
+                description: "", 
+                youtubeId: "pp_fdKzscYw",
+                // ★★★ 修正箇所：この動画だけ強制的に標準画質サムネイルを使う ★★★
+                customThumb: "https://img.youtube.com/vi/pp_fdKzscYw/hqdefault.jpg" 
+            }
         ];
 
         // Liquid Wave Animation
@@ -623,7 +634,7 @@
             if(contactBackdrop) contactBackdrop.addEventListener('click', closeContact);
         });
 
-// Render Works
+        // Render Works
         const gridContainer = document.getElementById('works-grid');
         function renderWorks(filterType) {
             gridContainer.innerHTML = '';
@@ -645,7 +656,7 @@
                 const workEl = document.createElement('div');
                 workEl.className = 'group cursor-pointer block animate-fade-in-up relative overflow-hidden rounded-xl shadow-lg';
                 
-                // ★★★ 修正箇所：画像読み込みエラー時に標準画質へ切り替える処理 ★★★
+                // ★★★ 修正箇所：画像読み込みエラー時に標準画質へ切り替える処理を追加 ★★★
                 workEl.innerHTML = `
                     <div class="aspect-video w-full bg-[#EFEBE9] relative overflow-hidden">
                         <img src="${thumbnailUrl}" 

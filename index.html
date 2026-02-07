@@ -623,7 +623,7 @@
             if(contactBackdrop) contactBackdrop.addEventListener('click', closeContact);
         });
 
-        // Render Works
+// Render Works
         const gridContainer = document.getElementById('works-grid');
         function renderWorks(filterType) {
             gridContainer.innerHTML = '';
@@ -632,9 +632,11 @@
 
             filteredWorks.forEach(work => {
                 let thumbnailUrl = '';
+                // カスタムサムネイルがあればそれを使う
                 if (work.customThumb) {
                     thumbnailUrl = work.customThumb;
                 } else if (work.youtubeId) {
+                    // まずは高画質サムネイルを試す
                     thumbnailUrl = `https://img.youtube.com/vi/${work.youtubeId}/maxresdefault.jpg`;
                 } else {
                     thumbnailUrl = 'https://via.placeholder.com/640x360?text=No+Image';
@@ -642,9 +644,14 @@
 
                 const workEl = document.createElement('div');
                 workEl.className = 'group cursor-pointer block animate-fade-in-up relative overflow-hidden rounded-xl shadow-lg';
+                
+                // ★★★ 修正箇所：画像読み込みエラー時に標準画質へ切り替える処理 ★★★
                 workEl.innerHTML = `
                     <div class="aspect-video w-full bg-[#EFEBE9] relative overflow-hidden">
-                        <img src="${thumbnailUrl}" alt="${work.title}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" onerror="this.src='https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg'">
+                        <img src="${thumbnailUrl}" 
+                             alt="${work.title}" 
+                             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                             <div class="self-start bg-[#FACC15] text-[#4E342E] text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                                 ${work.category}

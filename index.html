@@ -110,6 +110,24 @@
             transform: translateY(-20px);
             transition: opacity 0.3s, transform 0.3s;
         }
+
+        /* 箇条書きリストのスタイル */
+        ul.list-disc-custom {
+            list-style-type: none;
+            padding-left: 1.5em;
+        }
+        ul.list-disc-custom li {
+            position: relative;
+            margin-bottom: 0.5em;
+        }
+        ul.list-disc-custom li::before {
+            content: "•";
+            color: #FACC15;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
     </style>
 </head>
 <body class="text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E] relative">
@@ -215,6 +233,7 @@
                 <button data-filter="mv" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
                 <button data-filter="cg" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">CG / 3D</button>
                 <button data-filter="lyric" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Lyric Motion</button>
+                <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Jacket / Graphic</button>
             </div>
         </div>
 
@@ -286,14 +305,15 @@
                 <div>
                     <h4 class="text-sm font-bold text-[#8D6E63] mb-4 border-b border-[#D7CCC8] pb-2 inline-block">ご依頼にあたって</h4>
                     <div class="grid grid-cols-2 gap-4">
-                        <a href="#" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
-                            <i data-lucide="file-text" class="w-5 h-5 text-[#FACC15] group-hover:scale-110 transition-transform"></i>
-                            <span>ご依頼後の流れ</span>
-                        </a>
-                        <a href="#" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
+                        <button id="open-confirm-btn" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
                             <i data-lucide="check-circle-2" class="w-5 h-5 text-[#FACC15] group-hover:scale-110 transition-transform"></i>
                             <span>ご依頼前の<br>確認内容</span>
-                        </a>
+                        </button>
+
+                        <button id="open-flow-btn" class="bg-white text-[#5D4037] py-4 rounded-xl border-2 border-[#D7CCC8] hover:border-[#FACC15] hover:bg-[#FFFDE7] transition-all duration-300 font-bold text-sm flex flex-col items-center justify-center gap-2 text-center shadow-sm group">
+                            <i data-lucide="file-text" class="w-5 h-5 text-[#FACC15] group-hover:scale-110 transition-transform"></i>
+                            <span>ご依頼後の流れ</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -389,11 +409,145 @@
         </div>
     </div>
 
+    <div id="flow-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="flow-modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
+        <div class="bg-[#FFFCF5] w-full max-w-4xl max-h-[85vh] overflow-y-auto relative shadow-2xl rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="flow-modal-panel">
+            <button id="close-flow-modal" class="absolute top-4 right-4 p-2 bg-[#4E342E] text-[#FACC15] rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] z-10 transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="p-8 md:p-12">
+                <h3 class="text-2xl font-bold text-[#4E342E] mb-8 flex items-center gap-2 border-b-2 border-[#FACC15] pb-4">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                    ご依頼後の流れ
+                </h3>
+
+                <div class="space-y-8 relative before:absolute before:left-[19px] before:top-2 before:bottom-0 before:w-0.5 before:bg-[#D7CCC8]">
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-10 h-10 bg-[#4E342E] text-[#FACC15] rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">01</div>
+                        <h4 class="text-lg font-bold text-[#4E342E] mb-2">お見積り・ヒアリング</h4>
+                        <p class="text-sm text-[#5D4037] leading-relaxed">
+                            ご依頼内容を確認の上、「制作内容・料金・制作スケジュール」をお渡しいたします。
+                            問題がなければ、スケジュールを確保し見積書を発行いたします。
+                            NDA等の契約書の確認があればこちらのタイミングでお渡しください。
+                        </p>
+                    </div>
+
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-10 h-10 bg-[#8D6E63] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">02</div>
+                        <h4 class="text-lg font-bold text-[#4E342E] mb-2">ワンコーラス制作 / 確認</h4>
+                        <p class="text-sm text-[#5D4037] leading-relaxed">
+                            いただいた内容に基づいて仮制作（ワンコーラス程度）を行います。
+                            映像の方向性や雰囲気をご確認いただきます。<br>
+                            <span class="text-[#F57F17] font-bold text-xs mt-1 block">※テキストのフォントやサイズに関しては、このタイミングでの決定をお願いしております。</span>
+                        </p>
+                    </div>
+
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-10 h-10 bg-[#8D6E63] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">03</div>
+                        <h4 class="text-lg font-bold text-[#4E342E] mb-2">フルコーラス制作 / 確認</h4>
+                        <p class="text-sm text-[#5D4037] leading-relaxed">
+                            ワンコーラス確認での方向性をもとに、全体の制作を進めていきます。
+                            <span class="block bg-[#FFF8E1] p-2 mt-2 rounded border border-[#FACC15] text-xs">
+                                <strong>💡 修正について</strong><br>
+                                誤字脱字以外の無料修正は2回までとなっております。<br>
+                                (3回目以降の修正は別途料金が発生します)
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-10 h-10 bg-[#FACC15] text-[#4E342E] rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">04</div>
+                        <h4 class="text-lg font-bold text-[#4E342E] mb-2">最終納品・お支払い</h4>
+                        <p class="text-sm text-[#5D4037] leading-relaxed">
+                            Google Driveにて完成データを納品いたします。
+                            納品時に請求書もお渡ししておりますので、翌月末払いまでのご入金をお願いいたします。
+                            <span class="text-xs text-[#8D6E63] block mt-1">※会社規定のフォーマットがございましたらご相談ください。</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="confirm-modal-backdrop" class="absolute inset-0 bg-[#4E342E]/90 backdrop-blur-md"></div>
+        <div class="bg-[#FFFCF5] w-full max-w-5xl max-h-[85vh] overflow-y-auto relative shadow-2xl rounded-lg transform scale-95 transition-transform duration-300 border-4 border-[#FACC15]" id="confirm-modal-panel">
+            <button id="close-confirm-modal" class="absolute top-4 right-4 p-2 bg-[#4E342E] text-[#FACC15] rounded-full hover:bg-[#FACC15] hover:text-[#4E342E] z-10 transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="p-8 md:p-12">
+                <h3 class="text-2xl font-bold text-[#4E342E] mb-8 flex items-center gap-2 border-b-2 border-[#FACC15] pb-4">
+                    <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                    ご依頼前の確認内容
+                </h3>
+
+                <div class="space-y-8 text-[#5D4037]">
+                    
+                    <div class="bg-white p-6 rounded-xl border-2 border-[#D7CCC8]">
+                        <h4 class="font-bold text-lg mb-4 text-[#4E342E] flex items-center gap-2">
+                            <i data-lucide="image" class="w-5 h-5 text-[#FACC15]"></i>
+                            イラストデータについて
+                        </h4>
+                        <ul class="space-y-4 text-sm leading-relaxed">
+                            <li>
+                                <strong class="block text-[#4E342E] mb-1">【推奨サイズ】</strong>
+                                <span class="bg-[#FFF8E1] px-2 py-1 rounded font-bold">4K（3840×2160px）以上</span> が推奨です。<br>
+                                キャラクターの顔がアップになるシーンでも綺麗に見せるため、顔のアップ部分が 1920x1080px 以上になるサイズ感が理想です。
+                            </li>
+                            <li>
+                                <strong class="block text-[#4E342E] mb-1">【納品形式】</strong>
+                                基本的に <span class="font-bold">PSDファイル</span>（パーツ分け済みのもの）でのご提供をお願いしております。<br>
+                                <span class="text-xs text-[#8D6E63]">※PSDが不可の場合は透過PNGでも可ですが、演出の幅が限られる場合があります。</span>
+                            </li>
+                            <li>
+                                <strong class="block text-[#4E342E] mb-1">【レイヤー分けのポイント】</strong>
+                                髪（前髪/横髪/後ろ髪）、表情差分、小物などをレイヤー分けしていただくと、よりリッチなアニメーションが可能になります。<br>
+                                差分のみのレイヤーや、隠れてしまう部分（後ろ髪など）も描いていただけると大変助かります！
+                            </li>
+                        </ul>
+                        <p class="mt-4 text-xs bg-[#EFEBE9] p-3 rounded">
+                            ※イラスト発注段階で、このページをイラストレーター様に共有していただいても問題ございません。
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-md mb-2 text-[#4E342E]">📦 納品形式</h4>
+                            <p class="text-sm bg-white p-3 rounded border border-[#D7CCC8]">
+                                <strong>MP4</strong> または <strong>MOV</strong> ファイル<br>
+                                <span class="text-xs text-[#8D6E63] mt-1 block">※プロジェクトファイル（PF）の譲渡は原則行っておりませんが、別途料金にて対応可能です。</span>
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-md mb-2 text-[#4E342E]">📅 素材の準備</h4>
+                            <p class="text-sm bg-white p-3 rounded border border-[#D7CCC8]">
+                                原則として、イラストや音源などが揃った状態での着手を想定しております。<br>
+                                <span class="text-xs text-[#8D6E63] mt-1 block">※構図の相談などは着手前でも大歓迎です！</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-md mb-2 text-[#4E342E]">⚠️ お問い合わせについて</h4>
+                        <p class="text-sm leading-relaxed">
+                            「金額はいくらですか？」のみなど、詳細がないご連絡にはお返事できない場合がございます。<br>
+                            ご予算に幅がある場合は、作業量に応じた2〜3プランをご提案可能ですので、詳細をご記載の上お問い合わせください。<br>
+                            <span class="text-xs text-[#8D6E63] block mt-2">（通話ツール：Google Meet / Teams / Discordなど対応可能です）</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 送信後に戻るURLを現在のページに設定
         document.getElementById('next-redirect').value = window.location.href;
 
-// Works Data
+        // Works Data
         const WORKS = [
             { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },
             { id: 2, title: "喜劇的な完敗を　|　OFFICIAL VIDEO", category: "Music Video", type: "mv", year: "2022", client: "Aoto", description: "", color: "bg-[#FBC02D]", youtubeId: "Hn_u9hPLGlk" },
@@ -611,61 +765,108 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Modals
-            const contactBtn = document.getElementById('open-contact-btn');
-            const contactModal = document.getElementById('contact-modal');
-            const contactPanel = document.getElementById('contact-modal-panel');
-            const contactClose = document.getElementById('close-contact-modal');
-            const contactBackdrop = document.getElementById('contact-modal-backdrop');
+            // Modals Logic (Generic helper)
+            function setupModal(modalId, btnId, closeId, panelId) {
+                const modal = document.getElementById(modalId);
+                const btn = document.getElementById(btnId);
+                const closeBtn = document.getElementById(closeId);
+                const panel = document.getElementById(panelId);
+                const backdrop = document.getElementById(modalId + '-backdrop');
 
-            function openContact() {
-                contactModal.classList.remove('hidden');
+                function open() {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                        panel.classList.remove('scale-95');
+                        panel.classList.add('scale-100');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function close() {
+                    modal.classList.add('opacity-0');
+                    panel.classList.remove('scale-100');
+                    panel.classList.add('scale-95');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        // Special cleanup for video modal
+                        if(modalId === 'modal') {
+                            const videoArea = document.getElementById('modal-video-area');
+                            if(videoArea) videoArea.innerHTML = '';
+                        }
+                    }, 300);
+                }
+
+                if(btn) btn.addEventListener('click', open);
+                if(closeBtn) closeBtn.addEventListener('click', close);
+                if(backdrop) backdrop.addEventListener('click', close);
+                
+                // Expose close function for other uses if needed
+                return close;
+            }
+
+            // Setup all modals
+            const closeWorksModal = setupModal('modal', null, 'close-modal', 'modal-panel'); // Work modal is opened via grid click
+            setupModal('contact-modal', 'open-contact-btn', 'close-contact-modal', 'contact-modal-panel');
+            setupModal('flow-modal', 'open-flow-btn', 'close-flow-modal', 'flow-modal-panel');
+            setupModal('confirm-modal', 'open-confirm-btn', 'close-confirm-modal', 'confirm-modal-panel');
+
+            // Global exposure for Works grid to use
+            window.openWorksModal = function(work) {
+                document.getElementById('modal-title').textContent = work.title;
+                document.getElementById('modal-description').textContent = work.description;
+                document.getElementById('modal-category').textContent = work.category;
+                document.getElementById('modal-client').textContent = work.client;
+                document.getElementById('modal-year').textContent = work.year;
+                
+                const videoArea = document.getElementById('modal-video-area');
+                if(work.youtubeId) {
+                    videoArea.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${work.youtubeId}?autoplay=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else if (work.customThumb) {
+                    videoArea.innerHTML = `<img src="${work.customThumb}" class="w-full h-full object-contain bg-black/5">`;
+                } else {
+                    videoArea.innerHTML = `<div class="text-[#8D6E63] font-bold">No Media Available</div>`;
+                }
+                
+                lucide.createIcons();
+                
+                // Manually trigger the open logic for works modal
+                const modal = document.getElementById('modal');
+                const panel = document.getElementById('modal-panel');
+                modal.classList.remove('hidden');
                 setTimeout(() => {
-                    contactModal.classList.remove('opacity-0');
-                    contactPanel.classList.remove('scale-95');
-                    contactPanel.classList.add('scale-100');
+                    modal.classList.remove('opacity-0');
+                    panel.classList.remove('scale-95');
+                    panel.classList.add('scale-100');
                 }, 10);
                 document.body.style.overflow = 'hidden';
-            }
-
-            function closeContact() {
-                contactModal.classList.add('opacity-0');
-                contactPanel.classList.remove('scale-100');
-                contactPanel.classList.add('scale-95');
-                setTimeout(() => {
-                    contactModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-
-            if(contactBtn) contactBtn.addEventListener('click', openContact);
-            if(contactClose) contactClose.addEventListener('click', closeContact);
-            if(contactBackdrop) contactBackdrop.addEventListener('click', closeContact);
+            };
         });
 
         // Render Works
         const gridContainer = document.getElementById('works-grid');
         function renderWorks(filterType) {
             gridContainer.innerHTML = '';
+            
             const worksSource = filterType === 'all' ? WORKS : WORKS.filter(work => work.type === filterType);
             const filteredWorks = [...worksSource].reverse();
 
             filteredWorks.forEach(work => {
                 let thumbnailUrl = '';
-                // カスタムサムネイルがあればそれを使う
                 if (work.customThumb) {
                     thumbnailUrl = work.customThumb;
                 } else if (work.youtubeId) {
-                    // まずは高画質サムネイルを試す
                     thumbnailUrl = `https://img.youtube.com/vi/${work.youtubeId}/maxresdefault.jpg`;
                 } else {
                     thumbnailUrl = 'https://via.placeholder.com/640x360?text=No+Image';
                 }
 
+                const iconType = work.youtubeId ? 'play' : 'image';
+
                 const workEl = document.createElement('div');
                 workEl.className = 'group cursor-pointer block animate-fade-in-up relative overflow-hidden rounded-xl shadow-lg';
                 
-                // ★★★ 修正箇所：画像読み込みエラー時に標準画質へ切り替える処理を追加 ★★★
                 workEl.innerHTML = `
                     <div class="aspect-video w-full bg-[#EFEBE9] relative overflow-hidden">
                         <img src="${thumbnailUrl}" 
@@ -683,58 +884,16 @@
                                 ${work.client} — ${work.year}
                             </p>
                             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100 delay-75">
-                                <i data-lucide="${work.youtubeId ? 'play' : 'image'}" class="w-8 h-8 text-white fill-current ml-1"></i>
+                                <i data-lucide="${iconType}" class="w-8 h-8 text-white fill-current ml-1"></i>
                             </div>
                         </div>
                     </div>`;
-                workEl.addEventListener('click', () => openModal(work));
+                // Use global function to open modal
+                workEl.addEventListener('click', () => window.openWorksModal(work));
                 gridContainer.appendChild(workEl);
             });
             lucide.createIcons();
         }
-
-        // Works Modal
-        const modal = document.getElementById('modal');
-        const modalPanel = document.getElementById('modal-panel');
-        const closeModalBtn = document.getElementById('close-modal');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-
-        function openModal(work) {
-            document.getElementById('modal-title').textContent = work.title;
-            document.getElementById('modal-description').textContent = work.description;
-            document.getElementById('modal-category').textContent = work.category;
-            document.getElementById('modal-client').textContent = work.client;
-            document.getElementById('modal-year').textContent = work.year;
-            
-            const videoArea = document.getElementById('modal-video-area');
-            if(work.youtubeId) {
-                videoArea.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${work.youtubeId}?autoplay=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-            } else if (work.customThumb) {
-                videoArea.innerHTML = `<img src="${work.customThumb}" class="w-full h-full object-contain">`;
-            } else {
-                videoArea.innerHTML = `<div class="text-[#8D6E63] font-bold">No Video Available</div>`;
-            }
-
-            lucide.createIcons();
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); modalPanel.classList.remove('scale-100'); modalPanel.classList.add('scale-100'); }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            modalPanel.classList.remove('scale-100');
-            modalPanel.classList.add('scale-95');
-            setTimeout(() => { 
-                const videoArea = document.getElementById('modal-video-area');
-                if(videoArea) videoArea.innerHTML = '';
-                modal.classList.add('hidden'); 
-                document.body.style.overflow = ''; 
-            }, 300);
-        }
-
-        closeModalBtn.addEventListener('click', closeModal);
-        modalBackdrop.addEventListener('click', closeModal);
     </script>
 </body>
 </html>

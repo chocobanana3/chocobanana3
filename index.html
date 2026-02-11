@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+w<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocobanana3 Works - Portfolio</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍌</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23FACC15%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2270%22>🍌</text></svg>">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     
     <meta name="description" content="映像クリエイター Chocobanana3のポートフォリオサイト。3DCGとリリックモーションを中心にMVを制作しています。">
     <meta name="twitter:card" content="summary_large_image">
@@ -231,9 +231,9 @@
             <div class="flex flex-wrap gap-2" id="filter-container">
                 <button data-filter="all" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
                 <button data-filter="mv" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
-                <button data-filter="cg" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">CG / 3D</button>
+                <button data-filter="cg" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">3DCG</button>
                 <button data-filter="lyric" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Lyric Motion</button>
-                <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Jacket / Graphic</button>
+                <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Graphic</button>
             </div>
         </div>
 
@@ -547,7 +547,7 @@
         // 送信後に戻るURLを現在のページに設定
         document.getElementById('next-redirect').value = window.location.href;
 
-        // Works Data
+// Works Data
         const WORKS = [
             { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },
             { id: 2, title: "喜劇的な完敗を　|　OFFICIAL VIDEO", category: "Music Video", type: "mv", year: "2022", client: "Aoto", description: "", color: "bg-[#FBC02D]", youtubeId: "Hn_u9hPLGlk" },
@@ -574,6 +574,18 @@
             },
             { 
                 id: 14, 
+                title: "CINDERELLA GIRLS fes. Once Upon a St@rs", 
+                category: "graphic", 
+                type: "graphic", 
+                year: "2025", 
+                client: "アイドルマスター シンデレラガールズ", 
+                description: "", 
+                youtubeId: null,
+                // ↓ パスを修正しました！ imagesフォルダに 1.png を入れてください
+                customThumb: "./images/1.png"
+            }, // ← ★ここにカンマが必要でした！
+            { 
+                id: 15, 
                 title: "【Cover】 チェックのワンピース - back number / 奏手イヅル", 
                 category: "Music Video", 
                 type: "mv", 
@@ -581,7 +593,17 @@
                 client: "奏手イヅル", 
                 description: "", 
                 youtubeId: "NfBsPSGIYbM" 
-            }
+            },
+            { 
+                id: 16, 
+                title: "いつか絶望した時に見てほしいMV", 
+                category: "Music Video", 
+                type: "mv", 
+                year: "2026", 
+                client: "ふー.。", 
+                description: "", 
+                youtubeId: "xvh7Oz9cT3o" 
+            },
         ];
 
         // Liquid Wave Animation

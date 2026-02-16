@@ -132,6 +132,35 @@
 </head>
 <body class="text-[#4E342E] selection:bg-[#FACC15] selection:text-[#4E342E] relative">
 
+<div id="important-notice" class="fixed top-0 left-0 w-full z-[100] transform transition-transform duration-500">
+        <div class="bg-[#FACC15] text-[#4E342E] px-6 py-4 shadow-lg flex items-center justify-between border-b-2 border-[#4E342E]">
+            <div class="flex items-center gap-3">
+                <i data-lucide="alert-triangle" class="w-6 h-6 shrink-0"></i>
+                <p class="text-sm md:text-base font-bold leading-tight">
+                    【重要】お問い合わせシステムの不具合に関するお詫びと再送のお願い<br class="md:hidden">
+                    <span class="text-xs md:text-sm font-medium mt-1 inline-block">
+                        システム不具合により、本日までのお問い合わせが一部届いていない可能性がございます。
+                        お心当たりのある方は、大変お手数ですが再度送信をお願いいただけますと幸いです。
+                    </span>
+                </p>
+            </div>
+            <button onclick="closeNotice()" class="p-2 hover:bg-white/20 rounded-full transition-colors shrink-0">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ポップアップを閉じる関数
+        function closeNotice() {
+            const notice = document.getElementById('important-notice');
+            notice.style.transform = 'translateY(-100%)';
+            // 少し時間を置いてから完全に消す
+            setTimeout(() => {
+                notice.style.display = 'none';
+            }, 500);
+        }
+    </script>
     <div class="fixed inset-0 pointer-events-none z-0" style="
         background-image: radial-gradient(rgba(141, 110, 99, 0.15) 1px, transparent 1px);
         background-size: 20px 20px;

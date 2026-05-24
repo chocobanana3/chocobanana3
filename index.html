@@ -14,7 +14,7 @@
     <meta name="twitter:creator" content="@choco3_eizo">
     <meta property="og:url" content="https://chocobanana3.works">
     <meta property="og:title" content="Chocobanana3 Works">
-    <meta property="og:description" content="Creating Music Videos with 3DCG & Lyric Motion.">
+    <meta property="og:description" content="Creating MV · PV · VJ · OL with 3DCG & Lyric Motion.">
     
     <meta property="og:image" content="https://chocobanana3.works/images/ogp.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -207,7 +207,7 @@
 
             <div class="flex flex-col items-center gap-4 mt-6">
                 <p class="text-[#8D6E63] font-bold tracking-widest text-xs md:text-sm">
-                    Creating Music Videos with 3DCG & Lyric Motion.
+                    Creating MV · PV · VJ · OL with 3DCG & Lyric Motion.
                 </p>
                 <a href="https://x.com/choco3_eizo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-full hover:bg-[#333] transition-all duration-300 text-xs md:text-sm font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     <i data-lucide="twitter" class="w-4 h-4 fill-current"></i>
@@ -231,10 +231,9 @@
             </div>
             
             <div class="flex flex-wrap gap-2" id="filter-container">
-                <button data-filter="all" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
-                <button data-filter="mv" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
-                <button data-filter="cg" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">3DCG</button>
-                <button data-filter="lyric" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Lyric Motion</button>
+                <button data-filter="all"     class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
+                <button data-filter="mv"      class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
+                <button data-filter="vjol"    class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">VJ・OL</button>
                 <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Graphic</button>
             </div>
         </div>
@@ -541,148 +540,43 @@
 
     <script>
         
-        // Works Data
+        
+        // ============================================================
+        // WORKS データ
+        // typeの種類: "mv"=Music Video / "vjol"=VJ・OL / "graphic"=Graphic
+        // 新しい作品を追加する場合は下のリストにコピーして追記してください
+        // ============================================================
         const WORKS = [
-            { id: 1, title: "【オリジナルMV】メビウス/加瀬(cover)", category: "Music Video", type: "mv", year: "2022", client: "加瀬", description: "", color: "bg-[#5D4037]", youtubeId: "cslh-KqD4AE" },
-            { id: 2, title: "喜劇的な完敗を　|　OFFICIAL VIDEO", category: "Music Video", type: "mv", year: "2022", client: "Aoto", description: "", color: "bg-[#FBC02D]", youtubeId: "Hn_u9hPLGlk" },
-            { id: 3, title: "New Single 「六の目」　|　Teaser Movie", category: "Jacket", type: "jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "eH2xEUnO7iE" },
-            { id: 4, title: "六の目(Sixth)　|　Live MV / 縹 ワンマンライブ 「摩天楼」 at IMAIKE GROW", category: "Lyric Motion", type: "lyric", year: "2023", client: "Aoto", description: "", color: "bg-[#FDD835]", youtubeId: "LfaL82c1ep0" },
-            { id: 5, title: "7th Single 『Not Bad!!』　|　Teaser Movie", category: "Jacket", type: "jacket", year: "2023", client: "Aoto", description: "", color: "bg-[#3E2723]", youtubeId: "AtVfLB7q4NU" },
-            { id: 6, title: "永遠語り～El Ragna～ / Cover 魔狼ミリヤ×古守ちゆ", category: "Music Video", type: "mv", year: "2025", client: "魔狼ミリヤ", description: "", color: "bg-[#FFEB3B]", youtubeId: "X5N6dfAGQm4" },
-            { id: 7, title: "滲む視界だけがあなたの薫りで", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#795548]", youtubeId: "fd7avYOUCRc" },
-            { id: 8, title: "【歌ってみた】とても素敵な六月でした / Eight【サユリ】", category: "Music Video", type: "mv", year: "2025", client: "サユリ", description: "", color: "bg-[#FDD835]", youtubeId: "LAY-PqYGTs0" },
-            { id: 9, title: "一番の宝物 ～Yui final ver.～ / Girls Dead Monster STARRING LiSA Covered by 涼風しとら【歌ってみた】", category: "Music Video", type: "mv", year: "2025", client: "涼風しとら", description: "", color: "bg-[#3E2723]", youtubeId: "A6edM9HX21A" },
-            { id: 10, title: "栞 / 初音ミク", category: "Music Video", type: "mv", year: "2025", client: "新未*", description: "", color: "bg-[#FFEB3B]", youtubeId: "irVR-7sUt_U" },
-            { id: 11, title: "Aoto 『Third Party』 Music Video", category: "Music Video", type: "mv", year: "2025", client: "Aoto", description: "", color: "bg-[#795548]", youtubeId: "OLCj82iL5IM" },
-            { id: 12, title: "ライラック covered by 胡守みま", category: "Music Video", type: "mv", year: "2025", client: "胡守みま", description: "", youtubeId: "HLhFFwyE7L4" },
-            { 
-                id: 13, 
-                title: "5th Original Song/夜明けの翼標", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2025", 
-                client: "濡羽しゅあ", 
-                description: "", 
-                youtubeId: "pp_fdKzscYw",
-                customThumb: "https://img.youtube.com/vi/pp_fdKzscYw/hqdefault.jpg" 
-            },
-            { 
-                id: 14, 
-                title: "【#らぶしっく】5thブロック, メロガレBULLET, 五感的イローション, 月光蝶", 
-                category: "VJ", 
-                type: "VJ", 
-                year: "2025", 
-                client: "#らぶしっく", 
-                description: "", 
-                youtubeId: null,
-                // ↓ パスを修正しました！ imagesフォルダに 1.png を入れてください
-                customThumb: "./images/2.png"
-            }, //
-            { 
-                id: 15, 
-                title: "CINDERELLA GIRLS fes. Once Upon a St@rs", 
-                category: "VJ", 
-                type: "VJ", 
-                year: "2025", 
-                client: "アイドルマスター シンデレラガールズ", 
-                description: "", 
-                youtubeId: null,
-                // ↓ パスを修正しました！ imagesフォルダに 1.png を入れてください
-                customThumb: "./images/1.png"
-            }, //
-            { 
-                id: 16, 
-                title: "【Cover】 チェックのワンピース - back number / 奏手イヅル", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2026", 
-                client: "奏手イヅル", 
-                description: "", 
-                youtubeId: "NfBsPSGIYbM" 
-            },
-            { 
-                id: 17, 
-                title: "いつか絶望した時に見てほしいMV", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2026", 
-                client: "ふー.。", 
-                description: "", 
-                youtubeId: "xvh7Oz9cT3o" 
-            },
-            { 
-                id: 18, 
-                title: "花盛り / 重音テト - In Full Bloom", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2026", 
-                client: "ネてル / Nettle", 
-                description: "", 
-                youtubeId: "N0asIbuOPTg" 
-            },
-            { 
-                id: 19, 
-                title: "【Cover】散歩の邪魔 - いよわ / 奏手イヅル", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2026", 
-                client: "奏手イヅル", 
-                description: "", 
-                youtubeId: "Kyv60mw-zSM" 
-            },
-            { 
-                id: 20, 
-                title: "【3D LIVE】ゲスト多数 &超告知＆新衣装あり‼ さくらみこ生誕祭2026 Fashion Beat  🌸【 #さくらみこ生誕祭2026 】", 
-                category: "OL,VJ", 
-                type: "OL,VJ", 
-                year: "2026", 
-                client: "さくらみこ", 
-                description: "", 
-                youtubeId: "t6aiME0BOsg",
-                customThumb: "./images/3.jpg"
-            },
-            { 
-                id: 21, 
-                title: "【歌ってみた】シュガーソングとビターステップ / covered by リンドウネイロ", 
-                category: "MV", 
-                type: "MV", 
-                year: "2026", 
-                client: "リンドウネイロ", 
-                description: "", 
-                youtubeId: "fFIBY4hiGn8",
-            },
-            { 
-                id: 16, 
-                title: "【Cover】 オドロウゼ！ - Snow Man / 奏手イヅル", 
-                category: "Music Video", 
-                type: "mv", 
-                year: "2026", 
-                client: "奏手イヅル", 
-                description: "", 
-                youtubeId: "uqHnuOGoNI0" 
-            },
-            { 
-                id: 20, 
-                title: "にじさんじ 8th Anniversary LIVE“CONCERTO Day1”ソラニン", 
-                category: "OL,VJ", 
-                type: "OL,VJ", 
-                year: "2026", 
-                client: "にじさんじ", 
-                description: "", 
-                youtubeId: "Ne0vx70UCkU",
-                customThumb: "./images/4.png"
-            },
-            { 
-                id: 20, 
-                title: "にじさんじ 8th Anniversary LIVE“CONCERTO Day1”ドレミファロンド", 
-                category: "OL,VJ", 
-                type: "OL,VJ", 
-                year: "2026", 
-                client: "にじさんじ", 
-                description: "", 
-                youtubeId: "9tk2JN3iHGA",
-                customThumb: "./images/4.png"
-            },
+            // --- Music Video ---
+            { id: 1,  type: "mv",    year: "2022", title: "【オリジナルMV】メビウス/加瀬(cover)",                                                                client: "加瀬",                             youtubeId: "cslh-KqD4AE" },
+            { id: 2,  type: "mv",    year: "2022", title: "喜劇的な完敗を　|　OFFICIAL VIDEO",                                                                  client: "Aoto",                             youtubeId: "Hn_u9hPLGlk" },
+            { id: 3,  type: "graphic",    year: "2023", title: "New Single 「六の目」　|　Teaser Movie",                                                             client: "Aoto",                             youtubeId: "eH2xEUnO7iE" },
+            { id: 4,  type: "vjol",    year: "2023", title: "六の目(Sixth)　|　Live MV / 縹 ワンマンライブ 「摩天楼」 at IMAIKE GROW",                           client: "Aoto",                             youtubeId: "LfaL82c1ep0" },
+            { id: 5,  type: "graphic",    year: "2023", title: "7th Single 『Not Bad!!』　|　Teaser Movie",                                                          client: "Aoto",                             youtubeId: "AtVfLB7q4NU" },
+            { id: 6,  type: "mv",    year: "2025", title: "永遠語り～El Ragna～ / Cover 魔狼ミリヤ×古守ちゆ",                                                  client: "魔狼ミリヤ",                       youtubeId: "X5N6dfAGQm4" },
+            { id: 7,  type: "mv",    year: "2025", title: "滲む視界だけがあなたの薫りで",                                                                      client: "新未*",                            youtubeId: "fd7avYOUCRc" },
+            { id: 8,  type: "mv",    year: "2025", title: "【歌ってみた】とても素敵な六月でした / Eight【サユリ】",                                             client: "サユリ",                           youtubeId: "LAY-PqYGTs0" },
+            { id: 9,  type: "mv",    year: "2025", title: "一番の宝物 ～Yui final ver.～ / Girls Dead Monster STARRING LiSA Covered by 涼風しとら【歌ってみた】", client: "涼風しとら",                      youtubeId: "A6edM9HX21A" },
+            { id: 10, type: "mv",    year: "2025", title: "栞 / 初音ミク",                                                                                      client: "新未*",                            youtubeId: "irVR-7sUt_U" },
+            { id: 11, type: "mv",    year: "2025", title: "Aoto 『Third Party』 Music Video",                                                                   client: "Aoto",                             youtubeId: "OLCj82iL5IM" },
+            { id: 12, type: "mv",    year: "2025", title: "ライラック covered by 胡守みま",                                                                     client: "胡守みま",                         youtubeId: "HLhFFwyE7L4" },
+            { id: 13, type: "mv",    year: "2025", title: "5th Original Song/夜明けの翼標",                                                                     client: "濡羽しゅあ",                       youtubeId: "pp_fdKzscYw" },
+            { id: 16, type: "mv",    year: "2026", title: "【Cover】 チェックのワンピース - back number / 奏手イヅル",                                           client: "奏手イヅル",                       youtubeId: "NfBsPSGIYbM" },
+            { id: 17, type: "mv",    year: "2026", title: "いつか絶望した時に見てほしいMV",                                                                     client: "ふー.。",                          youtubeId: "xvh7Oz9cT3o" },
+            { id: 18, type: "mv",    year: "2026", title: "花盛り / 重音テト - In Full Bloom",                                                                  client: "ネてル / Nettle",                  youtubeId: "N0asIbuOPTg" },
+            { id: 19, type: "mv",    year: "2026", title: "【Cover】散歩の邪魔 - いよわ / 奏手イヅル",                                                          client: "奏手イヅル",                       youtubeId: "Kyv60mw-zSM" },
+            { id: 22, type: "mv",    year: "2026", title: "【Cover】 オドロウゼ！ - Snow Man / 奏手イヅル",                                                     client: "奏手イヅル",                       youtubeId: "uqHnuOGoNI0" },
+            { id: 23, type: "mv",    year: "2026", title: "【歌ってみた】シュガーソングとビターステップ / covered by リンドウネイロ",                            client: "リンドウネイロ",                   youtubeId: "fFIBY4hiGn8" },
+
+            // --- VJ・OL ---
+            { id: 14, type: "vjol",  year: "2025", title: "【#らぶしっく】5thブロック, メロガレBULLET, 五感的イローション, 月光蝶",                             client: "#らぶしっく",                      youtubeId: null, customThumb: "./images/2.png" },
+            { id: 15, type: "vjol",  year: "2025", title: "CINDERELLA GIRLS fes. Once Upon a St@rs",                                                            client: "アイドルマスター シンデレラガールズ", youtubeId: null, customThumb: "./images/1.png" },
+            { id: 20, type: "vjol",  year: "2026", title: "【3D LIVE】さくらみこ生誕祭2026 Fashion Beat",                                                      client: "さくらみこ",                       youtubeId: "t6aiME0BOsg", customThumb: "./images/3.jpg" },
+            { id: 24, type: "vjol",  year: "2026", title: "にじさんじ 8th Anniversary LIVE \"CONCERTO Day1\" ソラニン",                                       client: "にじさんじ",                       youtubeId: "Ne0vx70UCkU", customThumb: "./images/4.png" },
+            { id: 25, type: "vjol",  year: "2026", title: "にじさんじ 8th Anniversary LIVE \"CONCERTO Day1\" ドレミファロンド",                               client: "にじさんじ",                       youtubeId: "9tk2JN3iHGA", customThumb: "./images/4.png" },
+
+            // --- Graphic ---
+            // 例: { id: 26, type: "graphic", year: "2026", title: "タイトル", client: "クライアント名", youtubeId: null, customThumb: "./images/xxx.png" },
         ];
 
         // Liquid Wave Animation

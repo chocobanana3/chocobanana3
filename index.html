@@ -14,7 +14,7 @@
     <meta name="twitter:creator" content="@choco3_eizo">
     <meta property="og:url" content="https://chocobanana3.works">
     <meta property="og:title" content="Chocobanana3 Works">
-    <meta property="og:description" content="Creating MV · PV · VJ · OL with 3DCG & Lyric Motion.">
+    <meta property="og:description" content="Creating MV · PV · VJ · OL.">
     
     <meta property="og:image" content="https://chocobanana3.works/images/ogp.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -206,9 +206,6 @@
             </h2>
 
             <div class="flex flex-col items-center gap-4 mt-6">
-                <p class="text-[#8D6E63] font-bold tracking-widest text-xs md:text-sm">
-                    Creating MV · PV · VJ · OL with 3DCG & Lyric Motion.
-                </p>
                 <a href="https://x.com/choco3_eizo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-full hover:bg-[#333] transition-all duration-300 text-xs md:text-sm font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     <i data-lucide="twitter" class="w-4 h-4 fill-current"></i>
                     <span>Follow on X</span>
@@ -230,11 +227,15 @@
                 <p class="text-[#8D6E63] text-sm pl-5">サムネイルクリックで詳細を表示</p>
             </div>
             
-            <div class="flex flex-wrap gap-2" id="filter-container">
-                <button data-filter="all"     class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
-                <button data-filter="mv"      class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
-                <button data-filter="vjol"    class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">VJ・OL</button>
-                <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Graphic</button>
+            <div class="flex flex-col gap-2 items-start md:items-end">
+                <div class="flex flex-wrap gap-2" id="filter-container">
+                    <button data-filter="all"     class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-transparent bg-[#4E342E] text-[#FACC15]">ALL</button>
+                    <button data-filter="mv"      class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Music Video</button>
+                    <button data-filter="vjol"    class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">VJ・OL</button>
+                    <button data-filter="graphic" class="filter-btn px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]">Graphic</button>
+                </div>
+                <!-- 年フィルター：WORKSデータの年から自動生成されます -->
+                <div class="flex flex-wrap gap-1.5" id="year-filter-container"></div>
             </div>
         </div>
 
@@ -579,6 +580,13 @@
             // 例: { id: 26, type: "graphic", year: "2026", title: "タイトル", client: "クライアント名", youtubeId: null, customThumb: "./images/xxx.png" },
         ];
 
+        // タイプ → 画面表示用ラベルの対応表
+        const CATEGORY_LABELS = {
+            mv: "Music Video",
+            vjol: "VJ・OL",
+            graphic: "Graphic"
+        };
+
         // Liquid Wave Animation
         class ChocolateWave {
             constructor(selector) {
@@ -664,12 +672,37 @@
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             document.getElementById('year').textContent = new Date().getFullYear();
-            renderWorks('all');
+
+            // 現在選択中のフィルター状態
+            let currentTypeFilter = 'all';
+            let currentYearFilter = 'all';
+
+            // 年フィルターのボタンをWORKSデータから自動生成（古い順）
+            const yearFilterContainer = document.getElementById('year-filter-container');
+            const uniqueYears = [...new Set(WORKS.map(w => w.year))].sort();
+            const yearBtnClassActive = 'year-filter-btn px-3 py-1 text-xs font-bold transition-all duration-300 rounded-full border-2 border-[#4E342E] bg-[#4E342E] text-[#FACC15]';
+            const yearBtnClassInactive = 'year-filter-btn px-3 py-1 text-xs font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]';
+
+            const allYearBtn = document.createElement('button');
+            allYearBtn.setAttribute('data-year', 'all');
+            allYearBtn.className = yearBtnClassActive;
+            allYearBtn.textContent = '全期間';
+            yearFilterContainer.appendChild(allYearBtn);
+
+            uniqueYears.forEach(year => {
+                const btn = document.createElement('button');
+                btn.setAttribute('data-year', year);
+                btn.className = yearBtnClassInactive;
+                btn.textContent = year;
+                yearFilterContainer.appendChild(btn);
+            });
+
+            renderWorks(currentTypeFilter, currentYearFilter);
             
             wave = new ChocolateWave('#liquid-path');
             animate();
             
-            // Filters
+            // タイプフィルター（Music Video / VJ・OL / Graphic）
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -679,7 +712,20 @@
                     });
                     e.target.classList.remove('text-[#8D6E63]', 'hover:text-[#4E342E]');
                     e.target.classList.add('bg-[#4E342E]', 'text-[#FACC15]');
-                    renderWorks(e.target.getAttribute('data-filter'));
+                    currentTypeFilter = e.target.getAttribute('data-filter');
+                    renderWorks(currentTypeFilter, currentYearFilter);
+                });
+            });
+
+            // 年フィルター（タイプフィルターと組み合わせて絞り込み）
+            yearFilterContainer.querySelectorAll('.year-filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    yearFilterContainer.querySelectorAll('.year-filter-btn').forEach(b => {
+                        b.className = yearBtnClassInactive;
+                    });
+                    e.target.className = yearBtnClassActive;
+                    currentYearFilter = e.target.getAttribute('data-year');
+                    renderWorks(currentTypeFilter, currentYearFilter);
                 });
             });
 
@@ -811,7 +857,7 @@
             window.openWorksModal = function(work) {
                 document.getElementById('modal-title').textContent = work.title;
                 document.getElementById('modal-description').textContent = work.description;
-                document.getElementById('modal-category').textContent = work.category;
+                document.getElementById('modal-category').textContent = CATEGORY_LABELS[work.type] || work.type;
                 document.getElementById('modal-client').textContent = work.client;
                 document.getElementById('modal-year').textContent = work.year;
                 
@@ -841,11 +887,21 @@
 
         // Render Works
         const gridContainer = document.getElementById('works-grid');
-        function renderWorks(filterType) {
+        function renderWorks(typeFilter, yearFilter) {
             gridContainer.innerHTML = '';
-            
-            const worksSource = filterType === 'all' ? WORKS : WORKS.filter(work => work.type === filterType);
-            const filteredWorks = [...worksSource].reverse();
+
+            // タイプ・年それぞれで絞り込み（'all'の場合はそのジャンル/年は絞り込まない）
+            let filteredWorks = WORKS.filter(work => {
+                const matchesType = (typeFilter === 'all') || (work.type === typeFilter);
+                const matchesYear = (yearFilter === 'all') || (work.year === yearFilter);
+                return matchesType && matchesYear;
+            });
+
+            // 時系列順（年の古い順 → 同じ年はid順）に並べる
+            filteredWorks = filteredWorks.sort((a, b) => {
+                if (a.year !== b.year) return a.year.localeCompare(b.year);
+                return a.id - b.id;
+            });
 
             filteredWorks.forEach(work => {
                 let thumbnailUrl = '';
@@ -870,7 +926,7 @@
                              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                             <div class="self-start bg-[#FACC15] text-[#4E342E] text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                                ${work.category}
+                                ${CATEGORY_LABELS[work.type] || work.type}
                             </div>
                             <h4 class="text-white font-bold text-lg md:text-xl leading-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 line-clamp-2">
                                 ${work.title}

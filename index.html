@@ -679,7 +679,7 @@
 
             // 年フィルターのボタンをWORKSデータから自動生成（古い順）
             const yearFilterContainer = document.getElementById('year-filter-container');
-            const uniqueYears = [...new Set(WORKS.map(w => w.year))].sort();
+            const uniqueYears = [...new Set(WORKS.map(w => w.year))].sort().reverse();
             const yearBtnClassActive = 'year-filter-btn px-3 py-1 text-xs font-bold transition-all duration-300 rounded-full border-2 border-[#4E342E] bg-[#4E342E] text-[#FACC15]';
             const yearBtnClassInactive = 'year-filter-btn px-3 py-1 text-xs font-bold transition-all duration-300 rounded-full border-2 border-[#EFEBE9] hover:border-[#4E342E] text-[#8D6E63] hover:text-[#4E342E]';
 
@@ -897,10 +897,10 @@
                 return matchesType && matchesYear;
             });
 
-            // 時系列順（年の古い順 → 同じ年はid順）に並べる
+            // 時系列順（年の新しい順 → 同じ年はid降順）に並べる
             filteredWorks = filteredWorks.sort((a, b) => {
-                if (a.year !== b.year) return a.year.localeCompare(b.year);
-                return a.id - b.id;
+                if (a.year !== b.year) return b.year.localeCompare(a.year);
+                return b.id - a.id;
             });
 
             filteredWorks.forEach(work => {

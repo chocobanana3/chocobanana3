@@ -349,6 +349,12 @@
                 <div class="md:col-span-2">
                     <h2 id="modal-title" class="text-3xl font-bold mb-4">Title</h2>
                     <p id="modal-description" class="text-[#5D4037] leading-relaxed whitespace-pre-line font-medium">Description</p>
+
+                    <!-- Xの実績ポスト埋め込み欄（tweetUrlがある作品のみ表示） -->
+                    <div id="modal-tweet-section" class="mt-8 hidden">
+                        <h5 class="text-[#8D6E63] font-bold text-xs tracking-wider mb-3">実績ポスト</h5>
+                        <div id="modal-tweet-embed" class="max-w-[550px]"></div>
+                    </div>
                 </div>
                 <div class="space-y-6 text-sm">
                     <div>
@@ -556,6 +562,8 @@
         //   client     : クライアント名 / 歌い手名など
         //   youtubeId  : YouTubeのURLの「v=」以降の文字列（無ければ null）
         //   customThumb: youtubeIdが無い場合のサムネイル画像パス（無ければ省略可）
+        //   tweetUrl   : 実績報告したXのポストURL（あれば詳細画面にそのまま埋め込み表示されます。無ければ省略可）
+        //                例: tweetUrl: "https://x.com/choco3_eizo/status/1234567890123456789"
         // ============================================================
         const WORKS = [
 
@@ -767,6 +775,7 @@
                 title: "【MV】シンガーズライ、ライターズシン／めろぱか [Official Video]",
                 client: "めろんぱーかー",
                 youtubeId: "jeTdqXd4b4w"
+                tweetUrl: "https://x.com/choco3_eizo/status/2068170377797439552/video/1"
             },
 
             // ============== Graphic ==============
@@ -1037,6 +1046,8 @@
                         if(modalId === 'modal') {
                             const videoArea = document.getElementById('modal-video-area');
                             if(videoArea) videoArea.innerHTML = '';
+                            const tweetEmbed = document.getElementById('modal-tweet-embed');
+                            if(tweetEmbed) tweetEmbed.innerHTML = '';
                         }
                     }, 300);
                 }
@@ -1070,6 +1081,21 @@
                     videoArea.innerHTML = `<img src="${work.customThumb}" class="w-full h-full object-contain bg-black/5">`;
                 } else {
                     videoArea.innerHTML = `<div class="text-[#8D6E63] font-bold">No Media Available</div>`;
+                }
+
+                // 実績ポスト（Xの埋め込み）：work.tweetUrl がある場合のみ表示
+                const tweetSection = document.getElementById('modal-tweet-section');
+                const tweetEmbed = document.getElementById('modal-tweet-embed');
+                tweetEmbed.innerHTML = '';
+                if (work.tweetUrl) {
+                    tweetSection.classList.remove('hidden');
+                    tweetEmbed.innerHTML = `<blockquote class="twitter-tweet" data-theme="light"><a href="${work.tweetUrl}"></a></blockquote>`;
+                    // widgets.jsが読み込まれていれば埋め込みを描画する
+                    if (window.twttr && window.twttr.widgets) {
+                        window.twttr.widgets.load(tweetEmbed);
+                    }
+                } else {
+                    tweetSection.classList.add('hidden');
                 }
                 
                 lucide.createIcons();
@@ -1148,5 +1174,7 @@
             lucide.createIcons();
         }
     </script>
+    <!-- X(Twitter)の実績ポスト埋め込み用 -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
